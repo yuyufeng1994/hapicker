@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hapicker.iml" filepath="$PROJECT_DIR$/hapicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-admin/hapicker-admin.iml" filepath="$PROJECT_DIR$/hapicker-admin/hapicker-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-common/hapicker-common.iml" filepath="$PROJECT_DIR$/hapicker-common/hapicker-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-persistence/hapicker-persistence.iml" filepath="$PROJECT_DIR$/hapicker-persistence/hapicker-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-web/hapicker-web.iml" filepath="$PROJECT_DIR$/hapicker-web/hapicker-web.iml" />
+    </modules>
+  </component>
+</project>

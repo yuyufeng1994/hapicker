@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <description>
+        名称：哈皮客
+        网址：www.hapicker.com
+        作者：yuyufeng
+        简介：个人博客
+    </description>
+
+
+    <groupId>com.hapicker</groupId>
+    <artifactId>hapicker</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>hapicker-persistence</module>
+        <module>hapicker-common</module>
+        <module>hapicker-admin</module>
+        <module>hapicker-web</module>
+    </modules>
+
+
+</project>
