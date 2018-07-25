@@ -4,8 +4,12 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hapicker.iml" filepath="$PROJECT_DIR$/hapicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/hapicker-admin/hapicker-admin.iml" filepath="$PROJECT_DIR$/hapicker-admin/hapicker-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-cloud/hapicker-cloud.iml" filepath="$PROJECT_DIR$/hapicker-cloud/hapicker-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-cloud/hapicker-cloud-configer/hapicker-cloud-configer.iml" filepath="$PROJECT_DIR$/hapicker-cloud/hapicker-cloud-configer/hapicker-cloud-configer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-cloud/hapicker-cloud-eureka/hapicker-cloud-eureka.iml" filepath="$PROJECT_DIR$/hapicker-cloud/hapicker-cloud-eureka/hapicker-cloud-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/hapicker-common/hapicker-common.iml" filepath="$PROJECT_DIR$/hapicker-common/hapicker-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/hapicker-persistence/hapicker-persistence.iml" filepath="$PROJECT_DIR$/hapicker-persistence/hapicker-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapicker-service/hapicker-service.iml" filepath="$PROJECT_DIR$/hapicker-service/hapicker-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/hapicker-web/hapicker-web.iml" filepath="$PROJECT_DIR$/hapicker-web/hapicker-web.iml" />
     </modules>
   </component>

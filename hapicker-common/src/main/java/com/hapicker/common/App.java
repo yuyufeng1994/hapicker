@@ -1,4 +1,4 @@
-package com.hapicker;
+package com.hapicker.common;
 
 /**
  * @author yuyufeng
@@ -6,6 +6,6 @@ package com.hapicker;
  */
 public class App {
     public static void main(String[] args) {
-
+        System.out.println("App.main");
     }
 }

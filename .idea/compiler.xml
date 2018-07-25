@@ -7,19 +7,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hapicker-admin" />
+        <module name="hapicker-cloud-configer" />
+        <module name="hapicker-cloud-eureka" />
         <module name="hapicker-common" />
         <module name="hapicker-core" />
         <module name="hapicker-persistence" />
+        <module name="hapicker-service" />
         <module name="hapicker-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="hapicker" target="1.5" />
-      <module name="hapicker-admin" target="1.5" />
-      <module name="hapicker-common" target="1.5" />
+      <module name="hapicker" target="1.8" />
+      <module name="hapicker-admin" target="1.8" />
+      <module name="hapicker-cloud" target="1.8" />
+      <module name="hapicker-cloud-configer" target="1.8" />
+      <module name="hapicker-cloud-eureka" target="1.8" />
+      <module name="hapicker-common" target="1.8" />
       <module name="hapicker-core" target="1.5" />
-      <module name="hapicker-persistence" target="1.5" />
-      <module name="hapicker-web" target="1.5" />
+      <module name="hapicker-persistence" target="1.8" />
+      <module name="hapicker-service" target="1.8" />
+      <module name="hapicker-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
