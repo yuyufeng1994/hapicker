@@ -14,7 +14,7 @@
     </parent>
 
     <description>
-        名称：哈皮客
+        名称：哈皮阁
         网址：www.hapicker.com
         作者：yuyufeng
         简介：个人网站
@@ -57,6 +57,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
+                <version>1.5.10.RELEASE</version>
             </dependency>
 
             <!-- Test -->
@@ -65,6 +66,20 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>1.5.2.RELEASE</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>1.4.4.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>1.5.10.RELEASE</version>
+
+            </dependency>
+
 
             <!--hystrix熔断器报错解决，找不到class-->
             <dependency>
@@ -99,6 +114,8 @@
                 <artifactId>druid</artifactId>
                 <version>1.1.6</version>
             </dependency>
+
+
 
         </dependencies>
 
