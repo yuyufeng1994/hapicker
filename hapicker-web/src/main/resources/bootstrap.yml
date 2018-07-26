@@ -3,11 +3,18 @@ server:
 spring:
   application:
     name: hapicker-web
+    thymeleaf:
+          cache: false
+          mode: HTML
   cloud:
     config:  # git管理配置
-      uri: http://127.0.0.1:6018
+      uri: http://127.0.0.1:8888/
       label: master
       profile: dev
+      name: base,${spring.application.name}
+management:
+  security:
+    enabled: false
 #      discovery:
 #        enabled: true #是从配置中心读取文件。
 #        service-id: hpWeb #配置中心的servieId，即服务名。

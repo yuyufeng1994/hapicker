@@ -1,5 +1,5 @@
 server:
-  port: 6018
+  port: 8888
 spring:
   application:
     name: hapicker-cloud-configer
