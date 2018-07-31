@@ -2,16 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="include/layout">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Hapicker</title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
 </head>
 <body>
-    <div layout:fragment="content">
-        <div class="bac-1 hp-jumbotron" style="height: 730px;">
-            <p style="font-size: 50px;text-align: center;font-size: 6rem;line-height: 6rem;margin-top: 100px;">欢迎来到Hapicker!</p>
-            <p style="font-size: 20px;text-align: center;">Be a happy picker.</p>
-        </div>
+<div layout:fragment="content">
+    <div class="bac-1 hp-jumbotron">
+        <p class="hp-jumbotron-header">
+            欢迎来到Hapicker!</p>
+        <p style="font-size: 2rem;text-align: center;">Be a happy picker.</p>
+        <p align="center"><a class="hp-jumbotron-btn">View All</a></p>
     </div>
+    <div align="center">
+        <h2>Forever free, open source, and easy to use.</h2>
+        <p>Start Bootstrap is a collection of free to download Bootstrap themes and templates.</p>
+        <p>Our themes, built with HTML5, CSS3, and Bootstrap 4,</p>
+        <p> are open source and you can use them for any purpose, even commercially!</p>
+    </div>
+    <div class="bac-1" align="center" style="padding: 3.5rem;font-weight: 700;margin: 0;color: #ffffff;">
+        <h1>Want more Bootstrap themes & templates?</h1>
+        <h3>Subscribe to our mailing list to receive an update when new items arrive!</h3>
+    </div>
+</div>
 </body>
 </html>
