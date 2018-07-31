@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-expand-lg hp-nav">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Hapicker</a>
+            <a class="navbar-brand" href="/"><b>Hapicker</b></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -45,12 +45,12 @@
                     </ul>
                 </li>
             </ul>
-          <!--  <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>-->
+            <!--  <form class="navbar-form navbar-left">
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+              </form>-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Github</a></li>
                 <li><a href="#">关于</a></li>
@@ -69,9 +69,7 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div class="container hp-content">
-    <div layout:fragment="content"></div>
-</div>
+<div layout:fragment="content" class="container-fluid hp-content"></div>
 <footer class="container-fluid">
     <p align="center">@Hapicker 2018</p>
 </footer>

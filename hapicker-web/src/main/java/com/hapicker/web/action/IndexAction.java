@@ -18,6 +18,11 @@ public class IndexAction {
     @Value("${base.name}")
     private String param;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    String root() {
+        System.out.println(param);
+        return "index";
+    }
     @RequestMapping(value = "index", method = RequestMethod.GET)
     String index() {
         System.out.println(param);
