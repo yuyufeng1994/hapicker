@@ -18,6 +18,7 @@ public class HelloAction {
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     UserInfoDTO hello() {
+        System.out.println("HelloAction.hello");
         return helloRemoting.hello();
     }
 }

@@ -12,6 +12,7 @@
       <result column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
       <result column="user_avatar" javaType="java.lang.String" jdbcType="VARCHAR" />
       <result column="user_profile" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="user_pwd" javaType="java.lang.String" jdbcType="VARCHAR" />
       <result column="user_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <result column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <result column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -20,7 +21,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    user_id, user_name, user_nick, user_email, user_phone, user_avatar, user_profile,
+    user_id, user_name, user_nick, user_email, user_phone, user_avatar, user_profile,user_pwd,
     user_status, create_time, update_time
   </sql>
 </mapper>

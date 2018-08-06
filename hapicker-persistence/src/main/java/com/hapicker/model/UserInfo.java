@@ -60,6 +60,12 @@ public class UserInfo {
     private Integer userStatus;
 
     /**
+     * 用户状态
+     */
+    @Column(name = "user_pwd")
+    private String userPwd;
+
+    /**
      * 创建时间
      */
     @Column(name = "create_time")
@@ -254,5 +260,13 @@ public class UserInfo {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
     }
 }

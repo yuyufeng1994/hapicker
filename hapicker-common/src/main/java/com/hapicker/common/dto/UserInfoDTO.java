@@ -48,6 +48,11 @@ public class UserInfoDTO {
     private Integer userStatus;
 
     /**
+     * 用户密码
+     */
+    private String userPwd;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -135,5 +140,13 @@ public class UserInfoDTO {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
     }
 }
