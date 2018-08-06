@@ -1,7 +1,9 @@
 package com.hapicker.service.remoting;
 
+import com.hapicker.common.dto.UserInfoDTO;
 import com.hapicker.mapper.UserInfoMapper;
 import com.hapicker.model.UserInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +15,7 @@ import javax.sql.DataSource;
  * @date 2018/8/6.
  */
 @RestController
-public class IndexAction {
+public class HelloAction {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
@@ -21,10 +23,12 @@ public class IndexAction {
     @Autowired
     DataSource dataSource;
 
-    @RequestMapping("index")
-    UserInfo index() {
+    @RequestMapping("hello")
+    UserInfoDTO hello() {
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(1);
         System.out.println(userInfo);
-        return userInfo;
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        BeanUtils.copyProperties(userInfo,userInfoDTO);
+        return userInfoDTO;
     }
 }

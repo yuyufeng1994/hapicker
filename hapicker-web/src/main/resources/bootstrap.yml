@@ -15,6 +15,11 @@ spring:
 management:
   security:
     enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${base.eurekaUrl}
 #      discovery:
 #        enabled: true #是从配置中心读取文件。
 #        service-id: hpWeb #配置中心的servieId，即服务名。
