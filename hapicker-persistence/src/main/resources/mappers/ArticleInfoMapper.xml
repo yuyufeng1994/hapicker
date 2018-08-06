@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hapicker.mapper.ArticleInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hapicker.model.ArticleInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+      <id column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="article_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_brief" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_source" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <result column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hapicker.model.ArticleInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+      <id column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="article_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_brief" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_source" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result column="article_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <result column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <result column="article_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    article_id, article_title, article_brief, article_source, article_type, article_status, 
+    user_id, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    article_content
+  </sql>
+</mapper>

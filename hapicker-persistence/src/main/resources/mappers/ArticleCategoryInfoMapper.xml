@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hapicker.mapper.ArticleCategoryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hapicker.model.ArticleCategoryInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+      <id column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <result column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, article_id, category_id, create_time, update_time
+  </sql>
+</mapper>
