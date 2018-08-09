@@ -149,4 +149,21 @@ public class UserInfoDTO {
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfoDTO{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userNick='" + userNick + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userAvatar='" + userAvatar + '\'' +
+                ", userProfile='" + userProfile + '\'' +
+                ", userStatus=" + userStatus +
+                ", userPwd='" + userPwd + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

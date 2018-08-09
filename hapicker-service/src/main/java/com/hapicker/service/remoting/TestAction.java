@@ -1,5 +1,7 @@
 package com.hapicker.service.remoting;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018/3/28
  */
 @RestController
+@Api(description = "测试")
 @RequestMapping(value = "/test")
 public class TestAction {
     private final  Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private DiscoveryClient client;
 
+    @ApiOperation(value = "discovery", httpMethod = "GET")
     @RequestMapping(value = "/discovery")
     public String discovery(){
         ServiceInstance instance = client.getLocalServiceInstance();

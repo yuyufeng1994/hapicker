@@ -1,7 +1,10 @@
 package com.hapicker.web.remoting;
 
+import com.hapicker.common.dto.RequestDTO;
+import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.common.dto.UserInfoDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,6 +18,6 @@ public interface HelloRemoting {
      * 测试服务
      * @return
      */
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
-    UserInfoDTO hello();
+    @RequestMapping(value = "/hello",method = RequestMethod.POST)
+    ResponseDTO<UserInfoDTO> hello(@RequestBody UserInfoDTO requestDTO);
 }
