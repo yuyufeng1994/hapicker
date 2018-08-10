@@ -1,6 +1,5 @@
-package com.hapicker.web.remoting;
+package com.hapicker.web.client;
 
-import com.hapicker.common.dto.RequestDTO;
 import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.common.dto.UserInfoDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/8/6.
  */
 @FeignClient(value = "hapicker-service")
-public interface HelloRemoting {
+public interface HelloClient {
     /**
      * 测试服务
      * @return

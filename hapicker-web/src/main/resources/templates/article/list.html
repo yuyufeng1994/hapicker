@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="include/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Article - Hapicker</title>
+    <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="page-header">
+            <h1>博客
+                <small>Subtext for header</small>
+            </h1>
+        </div>
+        <div class="col-md-8">
+            <div th:each="at : ${articlePage.list}" class="panel panel-default">
+                <!--<div class="panel-heading" ></div>-->
+                <div class="panel-body">
+                    <h3 th:text="${at.articleTitle +' '+at.articleId}"></h3>
+                    <p class="hp-brief" th:text="${at.articleBrief}"></p>
+                    <p th:text="${'发表时间：'+ #dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <!--<div class="panel-heading" ></div>-->
+                <div class="panel-body">
+                    <h5>热门标签</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,5 @@
 package com.hapicker.service.remoting;
 
-import com.hapicker.common.dto.RequestDTO;
 import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.common.dto.UserInfoDTO;
 import com.hapicker.mapper.UserInfoMapper;
@@ -15,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.sql.DataSource;
-
 /**
  * @author yuyufeng
  * @date 2018/8/6.
  */
 @RestController
 @Api(description = "Hello你好")
-public class HelloAction {
+public class HelloRemoting {
 
     @Autowired
     private UserInfoMapper userInfoMapper;

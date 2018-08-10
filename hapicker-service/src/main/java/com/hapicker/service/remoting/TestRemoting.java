@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(description = "测试")
 @RequestMapping(value = "/test")
-public class TestAction {
+public class TestRemoting {
     private final  Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private DiscoveryClient client;
