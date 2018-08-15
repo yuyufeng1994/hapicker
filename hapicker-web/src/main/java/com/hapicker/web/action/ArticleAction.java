@@ -28,7 +28,9 @@ public class ArticleAction {
         articleInfoDTO.setArticleType(ArticleInfoTypeEnum.BLOG.getKey());
         RequestPageDTO<ArticleInfoDTO> requestPageDTO = new RequestPageDTO<>(pageNo, articleInfoDTO, "create_time desc");
         PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = articleClient.queryArticle(requestPageDTO).getContent();
-        model.addAttribute("articlePage", articleInfoDTOPageInfo);
+        model.addAttribute("page", articleInfoDTOPageInfo);
+        model.addAttribute("articleTypeName",ArticleInfoTypeEnum.getValue("blog"));
+        model.addAttribute("pageUrl","/article/blog/");
         return "article/list";
     }
 
@@ -39,7 +41,9 @@ public class ArticleAction {
         articleInfoDTO.setArticleType(ArticleInfoTypeEnum.ESSAY.getKey());
         RequestPageDTO<ArticleInfoDTO> requestPageDTO = new RequestPageDTO<>(pageNo, articleInfoDTO, "create_time desc");
         PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = articleClient.queryArticle(requestPageDTO).getContent();
-        model.addAttribute("articlePage", articleInfoDTOPageInfo);
+        model.addAttribute("page", articleInfoDTOPageInfo);
+        model.addAttribute("articleTypeName",ArticleInfoTypeEnum.getValue("essay"));
+        model.addAttribute("pageUrl","/article/essay/");
         return "article/list";
     }
 }

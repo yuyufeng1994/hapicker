@@ -1,5 +1,7 @@
 package com.hapicker.common.dto;
 
+import com.hapicker.common.constant.ArticleInfoTypeEnum;
+
 import java.util.Date;
 
 /**
@@ -30,6 +32,11 @@ public class ArticleInfoDTO {
      * 文章类别（博客、笔记等）
      */
     private String articleType;
+
+    /**
+     * 文章类别名称（博客、笔记等）
+     */
+    private String articleTypeName;
 
     /**
      * 文章状态
@@ -241,19 +248,11 @@ public class ArticleInfoDTO {
         this.articleContent = articleContent == null ? null : articleContent.trim();
     }
 
-    @Override
-    public String toString() {
-        return "ArticleInfoDTO{" +
-                "articleId=" + articleId +
-                ", articleTitle='" + articleTitle + '\'' +
-                ", articleBrief='" + articleBrief + '\'' +
-                ", articleSource='" + articleSource + '\'' +
-                ", articleType='" + articleType + '\'' +
-                ", articleStatus=" + articleStatus +
-                ", userId=" + userId +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", articleContent='" + articleContent + '\'' +
-                '}';
+    public String getArticleTypeName() {
+        return ArticleInfoTypeEnum.getValue(this.articleTypeName);
+    }
+
+    public void setArticleTypeName(String articleTypeName) {
+        this.articleTypeName = articleTypeName;
     }
 }

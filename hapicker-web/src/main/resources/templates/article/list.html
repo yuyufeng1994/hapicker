@@ -9,13 +9,16 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <div class="page-header">
-            <h1>博客
-                <small>Subtext for header</small>
+        <!--页头-->
+        <div class="page-header ">
+            <h1>
+                <hh th:text="${articleTypeName}"></hh>
+                <small>A happy picker.</small>
             </h1>
         </div>
         <div class="col-md-8">
-            <div th:each="at : ${articlePage.list}" class="panel panel-default">
+            <!--文章列表-->
+            <div th:each="at : ${page.list}" class="panel panel-default">
                 <!--<div class="panel-heading" ></div>-->
                 <div class="panel-body">
                     <h3 th:text="${at.articleTitle +' '+at.articleId}"></h3>
@@ -23,12 +26,33 @@
                     <p th:text="${'发表时间：'+ #dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></p>
                 </div>
             </div>
+
+            <!--分页标签-->
+
+            </div>
+        <div class="visible-md visible-lg">
+            <ul class="pagination">
+                <li th:if="${page.pageNum} != 1"><a
+                        th:href="@{${pageUrl+(page.pageNum-1)}}">&laquo; </a></li>
+            </ul>
+            <ul class="pagination" th:each="na:${page.navigatepageNums}">
+                <li th:if="${na} == ${page.pageNum}" class="active"><a th:text="${na}"></a></li>
+                <li th:if="${na} != ${page.pageNum}"><a th:text="${na}"
+                                                        th:href="@{${pageUrl+na}}"></a>
+                </li>
+            </ul>
+            <ul class="pagination">
+                <li th:if="${page.pageNum} != ${page.pages}"><a
+                        th:href="@{${pageUrl+(page.pageNum+1)}}"> &raquo;</a></li>
+            </ul>
+
         </div>
-        <div class="col-md-4">
+        <!--侧边栏-->
+        <div class="col-md-4 visible-md visible-lg">
             <div class="panel panel-default">
-                <!--<div class="panel-heading" ></div>-->
                 <div class="panel-body">
                     <h5>热门标签</h5>
+                    <p th:text="${pageUrl}"></p>
                 </div>
             </div>
         </div>
