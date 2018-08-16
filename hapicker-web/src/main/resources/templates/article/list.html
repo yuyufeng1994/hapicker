@@ -15,6 +15,7 @@
                 <li><a href="/">首页</a></li>
                 <li class="active" th:text="${articleTypeName}"></li>
             </ol>
+            <h3 th:if="${category != null}"><pi th:text="${category.categoryName}"></pi> <small th:text="${category.categoryBrief}"></small></h3>
         </div>
         <div class="col-md-9 hp-list-content hp-article-content-box">
             <!--文章列表-->
@@ -33,19 +34,24 @@
                             <p class="hp-brief" th:text="${at.articleBrief}"></p>
                             <!--<p><span class="label label-default hp-article-category" th:each="cg : ${at.categorys}" th:text="${cg.categoryName}"></span></p>-->
                             <p class="hp-create-time">
-                                <i class="glyphicon glyphicon-user"></i> <pi th:text="${' '+at.userNick}"></pi>
-                                <i class="glyphicon glyphicon-time"></i> <pi th:text="${' '+#dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi>
+                                <i class="glyphicon glyphicon-user"></i>
+                                <pi th:text="${' '+at.userNick}"></pi>
+                                <i class="glyphicon glyphicon-time"></i>
+                                <pi th:text="${' '+#dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi>
                             </p>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="panel panel-default visible-xs visible-sm">
+            <div class="panel panel-default visible-xs visible-sm" th:if="${page.total > page.size}">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-6" th:if="${page.pageNum} != 1"><a class="btn btn-default btn-block"  th:href="@{${pageUrl+(page.pageNum-1)}}">上一页</a></div>
-                        <div class="col-xs-6" th:if="${page.pageNum} != ${page.pages}"><a class="btn btn-default btn-block" th:href="@{${pageUrl+(page.pageNum+1)}}">下一页</a></div>
+                        <div class="col-xs-6" th:if="${page.pageNum} != 1"><a class="btn btn-default btn-block"
+                                                                              th:href="@{${pageUrl+(page.pageNum-1)}}">上一页</a>
+                        </div>
+                        <div class="col-xs-6" th:if="${page.pageNum} != ${page.pages}"><a
+                                class="btn btn-default btn-block" th:href="@{${pageUrl+(page.pageNum+1)}}">下一页</a></div>
                     </div>
                 </div>
             </div>
@@ -72,18 +78,20 @@
         </div>
 
         <!--侧边栏-->
-        <div class="col-md-3" >
-            <div class="panel panel-default  visible-md visible-lg" th:if="${categoryList != null && #lists.size(categoryList) > 0}">
+        <div class="col-md-3">
+            <div class="panel panel-default  visible-md visible-lg"
+                 th:if="${categoryList != null && #lists.size(categoryList) > 0}">
                 <div class="panel-body">
                     <h5>热门标签</h5>
-                    <span class="label label-primary hp-article-category" th:each="cg : ${categoryList}"
-                          th:text="${cg.categoryName}"></span>
+                    <a class="label label-primary hp-article-category" th:each="cg : ${categoryList}"
+                          th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-body hp-slider-ad">
                     <h5>广告</h5>
-                    <img src="http://bpic.588ku.com/back_pic/04/10/11/605816ea48ec240.jpg!r650/fw/800"  alt="图片无法显示" class="img-thumbnail">
+                    <img src="http://bpic.588ku.com/back_pic/04/10/11/605816ea48ec240.jpg!r650/fw/800" alt="图片无法显示"
+                         class="img-thumbnail">
                 </div>
             </div>
         </div>

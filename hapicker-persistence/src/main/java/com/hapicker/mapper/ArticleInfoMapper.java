@@ -24,4 +24,11 @@ public interface ArticleInfoMapper extends Mapper<ArticleInfo> {
      * @return
      */
     List<ArticleInfoDTO> selectList(ArticleInfo articleInfo);
+
+    /**
+     * 通过分类ID查询文章列表
+     * @param categoryId
+     * @return
+     */
+    List<ArticleInfoDTO> selectListByCategoryId(@Param("categoryId") Integer categoryId);
 }

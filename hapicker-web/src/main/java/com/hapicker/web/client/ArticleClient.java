@@ -44,4 +44,20 @@ public interface ArticleClient {
      */
     @RequestMapping(value = "listCategoryInfo", method = RequestMethod.GET)
     ResponseDTO<List<CategoryInfoDTO>> listCategoryInfo();
+
+    /**
+     * 根据分类查询文章列表
+     * @param requestPageDTO
+     * @return
+     */
+    @RequestMapping(value = "queryArticleByCategoryId", method = RequestMethod.POST)
+    ResponseDTO<PageInfo<ArticleInfoDTO>> listArticleByCategoryId(@RequestBody RequestPageDTO<Integer> requestPageDTO);
+
+    /**
+     * 获取类目详情
+     * @param categoryId
+     * @return
+     */
+    @RequestMapping(value = "category/{categoryId}", method = RequestMethod.GET)
+    ResponseDTO<CategoryInfoDTO> getCategoryInfoById(@PathVariable("categoryId") Integer categoryId);
 }

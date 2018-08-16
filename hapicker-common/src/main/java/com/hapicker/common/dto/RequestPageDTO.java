@@ -25,12 +25,6 @@ public class RequestPageDTO<T> {
         this.pageSize = pageSize;
     }
 
-    public RequestPageDTO(Integer pageNo, Integer pageSize, String orderBy) {
-        this.pageNo = pageNo;
-        this.pageSize = pageSize;
-        this.orderBy = orderBy;
-    }
-
     public RequestPageDTO(Integer pageNo,T content, String orderBy) {
         this.pageNo = pageNo;
         this.pageSize = 10;

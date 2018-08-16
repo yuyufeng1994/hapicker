@@ -130,4 +130,29 @@
         </if>
 
     </select>
+    <select id="selectListByCategoryId" resultType="com.hapicker.common.dto.ArticleInfoDTO" parameterType="java.lang.Integer">
+        SELECT
+            ai.article_id,
+            ai.article_title,
+            ai.article_brief,
+            ai.article_source,
+            ai.article_type,
+            ai.article_cover,
+            ai.article_status,
+            ai.user_id,
+            ai.article_content,
+            ai.create_time,
+            ai.update_time,
+            ui.user_nick,
+            ui.user_name,
+            ui.user_avatar,
+            ui.user_profile
+        FROM
+            article_category_info ac
+        LEFT JOIN article_info ai ON ac.article_id = ai.article_id
+        LEFT JOIN user_info ui ON ai.user_id = ui.user_id
+        WHERE
+            ac.category_id = #{categoryId,jdbcType=INTEGER}
+        AND article_status = 0
+    </select>
 </mapper>

@@ -71,6 +71,15 @@ public class ArticleInfoRemoting {
         return ResponseDTO.success(articleInfoPageInfo);
     }
 
+    @ApiOperation(value = "查询Article列表ByCategoryId", httpMethod = "POST")
+    @RequestMapping(value = "queryArticleByCategoryId", method = RequestMethod.POST)
+    ResponseDTO<PageInfo<ArticleInfoDTO>> listArticleByCategoryId(@RequestBody RequestPageDTO<Integer> requestPageDTO) {
+        PageHelper.startPage(requestPageDTO.getPageNo(), requestPageDTO.getPageSize(), requestPageDTO.getOrderBy());
+        List<ArticleInfoDTO> articleInfoList = articleInfoMapper.selectListByCategoryId(requestPageDTO.getContent());
+        PageInfo<ArticleInfoDTO> articleInfoPageInfo = new PageInfo<>(articleInfoList);
+        return ResponseDTO.success(articleInfoPageInfo);
+    }
+
 
     @ApiOperation(value = "插入Article", httpMethod = "POST")
     @RequestMapping(value = "insertArticle", method = RequestMethod.POST)
@@ -100,6 +109,15 @@ public class ArticleInfoRemoting {
     ResponseDTO deleteArticle(@RequestBody Integer articleId) {
         articleInfoMapper.deleteByPrimaryKey(articleId);
         return ResponseDTO.success();
+    }
+
+    @ApiOperation(value = "获取类目详情", httpMethod = "GET")
+    @RequestMapping(value = "category/{categoryId}", method = RequestMethod.GET)
+    ResponseDTO<CategoryInfoDTO> getCategoryInfoById(@PathVariable("categoryId") Integer categoryId) {
+        CategoryInfo categoryInfo = categoryInfoMapper.selectByPrimaryKey(categoryId);
+        CategoryInfoDTO categoryInfoDTO = new CategoryInfoDTO();
+        BeanUtils.copyProperties(categoryInfo,categoryInfoDTO);
+        return ResponseDTO.success(categoryInfoDTO);
     }
 
 

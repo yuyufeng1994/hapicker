@@ -57,7 +57,7 @@
                     <p th:text="${'来源：'+at.articleSource}" class="hp-article-source"></p>
                     </p>
                     <p th:if="${#lists.size(at.categorys) > 0}" >
-                        标签：<span class="label label-primary hp-article-category" th:each="cg : ${at.categorys}" th:text="${cg.categoryName}"></span>
+                        标签：<a class="label label-primary hp-article-category" th:each="cg : ${at.categorys}" th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
                     </p>
                 </div>
             </div>

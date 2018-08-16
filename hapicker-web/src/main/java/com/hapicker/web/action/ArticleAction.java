@@ -32,12 +32,12 @@ public class ArticleAction {
         RequestPageDTO<ArticleInfoDTO> requestPageDTO = new RequestPageDTO<>(pageNo, articleInfoDTO, "create_time desc");
         PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = articleClient.queryArticle(requestPageDTO).getContent();
 
-        List<CategoryInfoDTO> categoryInfoDTOList =  articleClient.listCategoryInfo().getContent();
+        List<CategoryInfoDTO> categoryInfoDTOList = articleClient.listCategoryInfo().getContent();
 
         model.addAttribute("page", articleInfoDTOPageInfo);
         model.addAttribute("categoryList", categoryInfoDTOList);
-        model.addAttribute("articleTypeName",ArticleInfoTypeEnum.getValue("blog"));
-        model.addAttribute("pageUrl","/article/blog/");
+        model.addAttribute("articleTypeName", ArticleInfoTypeEnum.getValue("blog"));
+        model.addAttribute("pageUrl", "/article/blog/");
         return "article/list";
     }
 
@@ -49,15 +49,29 @@ public class ArticleAction {
         RequestPageDTO<ArticleInfoDTO> requestPageDTO = new RequestPageDTO<>(pageNo, articleInfoDTO, "create_time desc");
         PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = articleClient.queryArticle(requestPageDTO).getContent();
         model.addAttribute("page", articleInfoDTOPageInfo);
-        model.addAttribute("articleTypeName",ArticleInfoTypeEnum.getValue("essay"));
-        model.addAttribute("pageUrl","/article/essay/");
+        model.addAttribute("articleTypeName", ArticleInfoTypeEnum.getValue("essay"));
+        model.addAttribute("pageUrl", "/article/essay/");
+        return "article/list";
+    }
+
+    @RequestMapping(value = "category/{categoryId}/{pageNo}", method = RequestMethod.GET)
+    String categoryList(@PathVariable("categoryId") Integer categoryId, @PathVariable("pageNo") Integer pageNo, Model model) {
+        RequestPageDTO<Integer> requestPageDTO = new RequestPageDTO<Integer>(pageNo, categoryId, "create_time desc");
+        PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = articleClient.listArticleByCategoryId(requestPageDTO).getContent();
+        model.addAttribute("page", articleInfoDTOPageInfo);
+        List<CategoryInfoDTO> categoryInfoDTOList = articleClient.listCategoryInfo().getContent();
+        CategoryInfoDTO categoryInfoDTO = articleClient.getCategoryInfoById(categoryId).getContent();
+        model.addAttribute("categoryList", categoryInfoDTOList);
+        model.addAttribute("category", categoryInfoDTO);
+        model.addAttribute("articleTypeName", categoryInfoDTO.getCategoryName());
+        model.addAttribute("pageUrl", "/article/category/" + categoryId + "/");
         return "article/list";
     }
 
     @RequestMapping(value = "content/{id}", method = RequestMethod.GET)
     String content(@PathVariable("id") Integer id, Model model) {
         ArticleInfoDTO articleInfoDTO = articleClient.getArticleByArticleId(id).getContent();
-        model.addAttribute("at",articleInfoDTO);
+        model.addAttribute("at", articleInfoDTO);
         return "article/content";
     }
 }
