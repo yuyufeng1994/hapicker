@@ -3,6 +3,7 @@ package com.hapicker.web.action;
 import com.github.pagehelper.PageInfo;
 import com.hapicker.common.constant.ArticleInfoTypeEnum;
 import com.hapicker.common.dto.ArticleInfoDTO;
+import com.hapicker.common.dto.CategoryInfoDTO;
 import com.hapicker.common.dto.RequestPageDTO;
 import com.hapicker.web.client.ArticleClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * @author yuyufeng
@@ -28,7 +31,11 @@ public class ArticleAction {
         articleInfoDTO.setArticleType(ArticleInfoTypeEnum.BLOG.getKey());
         RequestPageDTO<ArticleInfoDTO> requestPageDTO = new RequestPageDTO<>(pageNo, articleInfoDTO, "create_time desc");
         PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = articleClient.queryArticle(requestPageDTO).getContent();
+
+        List<CategoryInfoDTO> categoryInfoDTOList =  articleClient.listCategoryInfo().getContent();
+
         model.addAttribute("page", articleInfoDTOPageInfo);
+        model.addAttribute("categoryList", categoryInfoDTOList);
         model.addAttribute("articleTypeName",ArticleInfoTypeEnum.getValue("blog"));
         model.addAttribute("pageUrl","/article/blog/");
         return "article/list";
@@ -45,5 +52,12 @@ public class ArticleAction {
         model.addAttribute("articleTypeName",ArticleInfoTypeEnum.getValue("essay"));
         model.addAttribute("pageUrl","/article/essay/");
         return "article/list";
+    }
+
+    @RequestMapping(value = "content/{id}", method = RequestMethod.GET)
+    String content(@PathVariable("id") Integer id, Model model) {
+        ArticleInfoDTO articleInfoDTO = articleClient.getArticleByArticleId(id).getContent();
+        model.addAttribute("at",articleInfoDTO);
+        return "article/content";
     }
 }

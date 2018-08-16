@@ -49,9 +49,38 @@ body {
 
 .hp-nav {
     margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
 }
+
+.hp-nav-brand{
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.hp-panel-img{
+    margin-top: 20px;
+}
+
+.hp-list-panel-header-a{
+color: #0f0f0f;
+}
+
 .hp-brief{
     color: #666666;
+}
+.hp-create-time{
+    color: #666666;
+}
+.hp-article-content{
+    padding: 0;
+    margin: 0;
+}
+.hp-article-content-box{
+    padding: 0;
+    margin:0;
 }
 
 .hp-footer{
@@ -64,10 +93,48 @@ body {
     padding: 5rem;
 }
 
+.hp-page-breadcrumb{
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 38px;
+}
+.hp-page-breadcrumb ol{
+
+}
+.hp-article-avatar{
+}
+.hp-article-user{
+    color: #666666;
+}
+.hp-article-user img{
+    width: 30%;
+    margin-left: 35%;
+    margin-bottom: 20px;
+}
+.hp-article-source{
+    word-break:break-all;
+    white-space:normal;
+}
+.hp-article-category{
+    margin: 2px;
+    padding: 5px;
+    word-wrap:break-word;
+    white-space:normal;
+    cursor: pointer;
+    display: inline-block;  /*将span当做块级元素对待*/
+}
+.hp-slider-ad{
+    cursor: pointer;
+}
+
 @media (max-width:768px) {
     .hp-jumbotron-header {
         font-size: 3rem;
         text-align: center;
         line-height: 3rem;
+    }
+    .hp-article-content-box{
+        padding: 0;
+        margin: 20px 0;
     }
 }

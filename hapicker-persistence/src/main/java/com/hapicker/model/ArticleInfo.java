@@ -42,6 +42,12 @@ public class ArticleInfo {
     private String articleType;
 
     /**
+     * 文章封面地址
+     */
+    @Column(name = "article_cover")
+    private String articleCover;
+
+    /**
      * 文章状态
      */
     @Column(name = "article_status")
@@ -254,5 +260,13 @@ public class ArticleInfo {
      */
     public void setArticleContent(String articleContent) {
         this.articleContent = articleContent == null ? null : articleContent.trim();
+    }
+
+    public String getArticleCover() {
+        return articleCover;
+    }
+
+    public void setArticleCover(String articleCover) {
+        this.articleCover = articleCover;
     }
 }

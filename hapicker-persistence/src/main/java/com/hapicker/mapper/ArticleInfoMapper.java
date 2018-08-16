@@ -1,10 +1,27 @@
 package com.hapicker.mapper;
 
+import com.hapicker.common.dto.ArticleInfoDTO;
 import com.hapicker.model.ArticleInfo;
+import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * @author yuyufeng
  */
 public interface ArticleInfoMapper extends Mapper<ArticleInfo> {
+    /**
+     * 获取单个文章
+     * @param articleId
+     * @return
+     */
+    ArticleInfoDTO getArticleInfoById(@Param("articleId") Integer articleId);
+
+    /**
+     * 获取文章列表
+     * @param articleInfo
+     * @return
+     */
+    List<ArticleInfoDTO> selectList(ArticleInfo articleInfo);
 }

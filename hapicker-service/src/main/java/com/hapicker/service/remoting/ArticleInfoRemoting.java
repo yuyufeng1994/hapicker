@@ -3,6 +3,7 @@ package com.hapicker.service.remoting;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hapicker.common.constant.StatusEnum;
 import com.hapicker.common.dto.ArticleInfoDTO;
 import com.hapicker.common.dto.CategoryInfoDTO;
 import com.hapicker.common.dto.RequestPageDTO;
@@ -15,10 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,24 +51,24 @@ public class ArticleInfoRemoting {
     }
 
 
+    @ApiOperation(value = "获取Article", httpMethod = "GET")
+    @RequestMapping(value = "getArticle/{id}", method = RequestMethod.GET)
+    ResponseDTO<ArticleInfoDTO> getArticleInfo(@PathVariable("id") Integer id) {
+        ArticleInfoDTO articleInfo = articleInfoMapper.getArticleInfoById(id);
+        return ResponseDTO.success(articleInfo);
+    }
+
+
     @ApiOperation(value = "查询Article列表", httpMethod = "POST")
     @RequestMapping(value = "queryArticle", method = RequestMethod.POST)
     ResponseDTO<PageInfo<ArticleInfoDTO>> listArticle(@RequestBody RequestPageDTO<ArticleInfoDTO> requestPageDTO) {
         ArticleInfo articleInfo = new ArticleInfo();
         BeanUtils.copyProperties(requestPageDTO.getContent(),articleInfo);
         PageHelper.startPage(requestPageDTO.getPageNo(), requestPageDTO.getPageSize(), requestPageDTO.getOrderBy());
-        List<ArticleInfo> articleInfoList = articleInfoMapper.select(articleInfo);
-        PageInfo<ArticleInfo> articleInfoPageInfo = new PageInfo<>(articleInfoList);
-
-        Page<ArticleInfoDTO> articleInfoDTOPage = new Page<>(requestPageDTO.getPageNo(), requestPageDTO.getPageSize());
-        for (ArticleInfo info : articleInfoList) {
-            ArticleInfoDTO articleInfoDTO = new ArticleInfoDTO();
-            BeanUtils.copyProperties(info, articleInfoDTO);
-            articleInfoDTOPage.add(articleInfoDTO);
-        }
-        articleInfoDTOPage.setTotal(articleInfoPageInfo.getTotal());
-        PageInfo<ArticleInfoDTO> articleInfoDTOPageInfo = new PageInfo<>(articleInfoDTOPage);
-        return ResponseDTO.success(articleInfoDTOPageInfo);
+        articleInfo.setArticleStatus(StatusEnum.NORMAL.getKey());
+        List<ArticleInfoDTO> articleInfoList = articleInfoMapper.selectList(articleInfo);
+        PageInfo<ArticleInfoDTO> articleInfoPageInfo = new PageInfo<>(articleInfoList);
+        return ResponseDTO.success(articleInfoPageInfo);
     }
 
 

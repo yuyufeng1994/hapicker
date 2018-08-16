@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="include/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Article - Hapicker -  发现快乐</title>
+    <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <!--页头-->
+        <div class="page-header hp-page-breadcrumb visible-md visible-lg">
+            <ol class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li> <a th:href="@{'/article/'+${at.articleType}+'/1'}" th:text="${at.articleTypeName}"></a></li>
+                <li  class="active" th:text="${at.articleTitle}"></li>
+            </ol>
+        </div>
+        <div class="col-md-9 hp-article-content-box">
+            <!--文章列表-->
+            <div class="panel panel-default hp-article-content">
+                <div class="panel-body">
+                    <h3 th:text="${at.articleTitle}"></h3>
+                    <!--<p class="hp-create-time" >用户：<img th:src='@{${at.userAvatar}}' alt="用户无头像" class="img-rounded hp-article-avatar"> <pi th:text="${at.userNick}"></pi>&nbsp;创建于：<pi th:text="${#dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi></p>-->
+                    <!--文章内容-->
+                    <div th:utext="${at.articleContent}"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--侧边栏-->
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body hp-article-user">
+                    <p><i class="glyphicon glyphicon-user"></i></p>
+                    <img th:src='@{${at.userAvatar}}' alt="用户无头像" class="img-circle center-block">
+                    <p>
+                        <pi th:text="${'用户：'+at.userNick}"></pi
+                    </p>
+                    <p>
+                        <pi th:text="${'简介：'+at.userProfile}"></pi
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body hp-article-user">
+                    <p><i class="glyphicon glyphicon-tag"></i></p>
+                    <p>
+                        <pi th:text="${'创建于：'+#dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi>
+                    </p>
+                    <p>
+                        <pi th:if="${at.createTime!=at.updateTime}"
+                            th:text="${'更新于：'+#dates.format(at.updateTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi>
+                    </p>
+                    <p th:if="${at.articleSource != null}" >
+                    <p th:text="${'来源：'+at.articleSource}" class="hp-article-source"></p>
+                    </p>
+                    <p th:if="${#lists.size(at.categorys) > 0}" >
+                        标签：<span class="label label-primary hp-article-category" th:each="cg : ${at.categorys}" th:text="${cg.categoryName}"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body hp-slider-ad">
+                    <h5>广告</h5>
+                    <img src="http://bpic.588ku.com/back_pic/04/10/11/605816ea48ec240.jpg!r650/fw/800"  alt="图片无法显示" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -17,4 +17,20 @@
     -->
     category_id, category_name, category_brief, create_time, update_time
   </sql>
+    <select id="listCategoryInfoByArticleId" resultType="com.hapicker.common.dto.CategoryInfoDTO">
+      SELECT
+	category_id,
+	category_name
+FROM
+	category_info
+WHERE
+	category_id IN (
+		SELECT
+			category_id
+		FROM
+			article_category_info
+		WHERE
+			article_id = #{articleId,jdbcType=INTEGER}
+	)
+    </select>
 </mapper>

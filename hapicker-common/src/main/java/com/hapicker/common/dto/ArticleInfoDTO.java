@@ -2,7 +2,9 @@ package com.hapicker.common.dto;
 
 import com.hapicker.common.constant.ArticleInfoTypeEnum;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yuyufeng
@@ -22,6 +24,12 @@ public class ArticleInfoDTO {
      * 文章简介
      */
     private String articleBrief;
+
+    /**
+     * 封面地址
+     */
+    private String articleCover;
+
 
     /**
      * 文章来源
@@ -49,6 +57,28 @@ public class ArticleInfoDTO {
     private Integer userId;
 
     /**
+     * 用户名
+     */
+    private String userName;
+
+    /**
+     * 用户昵称
+     */
+    private String userNick;
+
+    /**
+     * 用户头像
+     */
+    private String userAvatar;
+    /**
+     * 用户简介
+     */
+    private String userProfile;
+
+
+
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -63,6 +93,12 @@ public class ArticleInfoDTO {
      */
     private String articleContent;
 
+    /**
+     * 文章分类
+     */
+    private List<CategoryInfoDTO> categorys = new ArrayList<>();
+
+
 
     public ArticleInfoDTO() {
         super();
@@ -75,6 +111,22 @@ public class ArticleInfoDTO {
      */
     public Integer getArticleId() {
         return articleId;
+    }
+
+    public String getUserNick() {
+        return userNick;
+    }
+
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
+    }
+
+    public String getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(String userProfile) {
+        this.userProfile = userProfile;
     }
 
     /**
@@ -249,10 +301,44 @@ public class ArticleInfoDTO {
     }
 
     public String getArticleTypeName() {
-        return ArticleInfoTypeEnum.getValue(this.articleTypeName);
+        return ArticleInfoTypeEnum.getValue(this.articleType);
     }
 
     public void setArticleTypeName(String articleTypeName) {
         this.articleTypeName = articleTypeName;
     }
+
+    public String getArticleCover() {
+        return articleCover;
+    }
+
+    public void setArticleCover(String articleCover) {
+        this.articleCover = articleCover;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
+
+    public List<CategoryInfoDTO> getCategorys() {
+        return categorys;
+    }
+
+    public void setCategorys(List<CategoryInfoDTO> categorys) {
+        this.categorys = categorys;
+    }
+
+
 }

@@ -31,8 +31,11 @@ public class IndexAction {
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
     String home() {
-        System.out.println(param);
         return "homepage";
+    }
+    @RequestMapping(value = "about", method = RequestMethod.GET)
+    String about() {
+        return "about";
     }
 
 
