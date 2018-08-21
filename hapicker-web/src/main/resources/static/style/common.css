@@ -15,7 +15,7 @@ body {
     font-weight: 700;
     margin: 0;
     color: #ffffff;
-    height: 40rem;
+    height: 550px;
 }
 
 .hp-jumbotron-btn {
@@ -97,9 +97,10 @@ color: #0f0f0f;
     font-size: 17px;
     font-weight: 400;
     line-height: 38px;
+    margin: 5px;
 }
 .hp-page-breadcrumb ol{
-
+    margin: 0px;
 }
 .hp-article-avatar{
 }
@@ -126,7 +127,66 @@ color: #0f0f0f;
 .hp-slider-ad{
     cursor: pointer;
 }
+.hp-index-bac-white{
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
 
+.hp-masthead-img{
+    margin-top:20px;
+    border: 1px solid rgba(0,0,0,.4);
+    border-radius: 4px;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,.4);
+}
+
+.hp-index-hr-short{
+    width: 130px;
+    margin-top:35px ;
+    margin-bottom:35px ;
+}
+
+.hp-index-text-box{
+}
+.hp-index-panel-down button{
+    font-weight: 700;
+}
+.hp-index-panel-box-title{
+    font-family: pt sans caption,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+.hp-index-panel-box-text{
+    font-family: libre franklin,Helvetica,Arial,sans-serif;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+}
+.hp-index-panel-box .panel{
+    height: 360px;
+    width: 320px;
+}
+.hp-index-panel-box .panel .panel-body{
+    margin: 0px;
+    padding: 0px;
+}
+.hp-index-panel-up{
+    height: 200px;
+    width: 318px;
+    overflow: hidden;
+}
+.hp-index-panel-down{
+    width: 318px;
+    height: 132px;
+    overflow: hidden;
+    margin-top: 25px;
+    background-color: #f5f5f5;
+}
+.hp-index-panel-up image{
+    margin: 0;
+}
 @media (max-width:768px) {
     .hp-jumbotron-header {
         font-size: 3rem;

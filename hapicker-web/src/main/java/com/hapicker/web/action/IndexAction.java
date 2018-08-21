@@ -1,6 +1,7 @@
 package com.hapicker.web.action;
 
 
+import com.hapicker.common.exception.BaseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
@@ -30,9 +31,12 @@ public class IndexAction {
     }
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
-    String home() {
-        return "homepage";
+    String home(){
+        throw new BaseException(404,"找不到页面错误!@");
     }
+
+
+
     @RequestMapping(value = "about", method = RequestMethod.GET)
     String about() {
         return "about";
