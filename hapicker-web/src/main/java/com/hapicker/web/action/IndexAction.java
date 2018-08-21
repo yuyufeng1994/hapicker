@@ -4,10 +4,14 @@ package com.hapicker.web.action;
 import com.hapicker.common.exception.BaseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author yuyufeng
@@ -24,17 +28,22 @@ public class IndexAction {
         System.out.println(param);
         return "index";
     }
+
     @RequestMapping(value = "index", method = RequestMethod.GET)
     String index() {
         System.out.println(param);
         return "index";
     }
 
-    @RequestMapping(value = "home", method = RequestMethod.GET)
-    String home(){
-        throw new BaseException(404,"找不到页面错误!@");
-    }
+    @Resource(name = "redisTemplate")
+    private ValueOperations<String, String> valueOs;
 
+    @RequestMapping(value = "home", method = RequestMethod.GET)
+    String home() {
+        valueOs.set("aa","bb",1000, TimeUnit.MILLISECONDS);
+        System.out.println(valueOs.get("aa"));
+        return "index";
+    }
 
 
     @RequestMapping(value = "about", method = RequestMethod.GET)

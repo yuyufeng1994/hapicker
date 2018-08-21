@@ -192,6 +192,17 @@ color: #0f0f0f;
 .hp-index-panel-up image{
     margin: 0;
 }
+.hp-login-box-parent{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.hp-login-box{
+    padding: 50px;
+    color: #212529;
+    background:none;
+}
+
+
 @media (max-width:768px) {
     .hp-jumbotron-header {
         font-size: 3rem;
@@ -201,5 +212,8 @@ color: #0f0f0f;
     .hp-article-content-box{
         padding: 0;
         margin: 20px 0;
+    }
+    .hp-login-box-parent{
+        padding: 10px;
     }
 }

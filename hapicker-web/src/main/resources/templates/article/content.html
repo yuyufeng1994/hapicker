@@ -3,7 +3,7 @@
       layout:decorator="include/layout">
 <head>
     <meta charset="UTF-8"/>
-    <title>Article - Hapicker -  发现快乐</title>
+    <title th:text="${at.articleTitle+' - Hapicker -  发现快乐'}"></title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
 </head>
 <body>
@@ -13,8 +13,8 @@
         <div class="page-header hp-page-breadcrumb visible-md visible-lg">
             <ol class="breadcrumb">
                 <li><a href="/">首页</a></li>
-                <li> <a th:href="@{'/article/'+${at.articleType}+'/1'}" th:text="${at.articleTypeName}"></a></li>
-                <li  class="active" th:text="${at.articleTitle}"></li>
+                <li><a th:href="@{'/article/'+${at.articleType}+'/1'}" th:text="${at.articleTypeName}"></a></li>
+                <li class="active" th:text="${at.articleTitle}"></li>
             </ol>
         </div>
         <div class="col-md-9 hp-article-content-box">
@@ -53,18 +53,20 @@
                         <pi th:if="${at.createTime!=at.updateTime}"
                             th:text="${'更新于：'+#dates.format(at.updateTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi>
                     </p>
-                    <p th:if="${at.articleSource != null}" >
+                    <p th:if="${at.articleSource != null}">
                     <p th:text="${'来源：'+at.articleSource}" class="hp-article-source"></p>
                     </p>
-                    <p th:if="${#lists.size(at.categorys) > 0}" >
-                        标签：<a class="label label-primary hp-article-category" th:each="cg : ${at.categorys}" th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
+                    <p th:if="${#lists.size(at.categorys) > 0}">
+                        标签：<a class="label label-primary hp-article-category" th:each="cg : ${at.categorys}"
+                              th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
                     </p>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-body hp-slider-ad">
                     <h5>广告</h5>
-                    <img src="http://bpic.588ku.com/back_pic/04/10/11/605816ea48ec240.jpg!r650/fw/800"  alt="图片无法显示" class="img-thumbnail">
+                    <img src="http://bpic.588ku.com/back_pic/04/10/11/605816ea48ec240.jpg!r650/fw/800" alt="图片无法显示"
+                         class="img-thumbnail">
                 </div>
             </div>
         </div>
