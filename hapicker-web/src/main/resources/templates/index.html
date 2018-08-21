@@ -12,7 +12,8 @@
         <div class="bac-1 hp-jumbotron">
             <p class="hp-jumbotron-header">Hapicker</p>
             <p style="font-size: 2rem;text-align: center;">博客、工具及私藏，提升技术，发现快乐</p>
-            <p align="center"><a class="hp-jumbotron-btn">View All</a></p>
+            <p align="center"><a class="hp-jumbotron-btn" href="#index-panel-scroll" id="index-panel-scroll-button">View
+                All</a></p>
             <img class="center-block img-rounded hp-masthead-img"
                  src="https://startbootstrap.com/assets/img/creative-tim/creative-tim.jpg"/>
         </div>
@@ -25,10 +26,12 @@
         </div>
         <hr class="hp-index-hr-short"/>
         <div class="container">
-            <div class="hp-index-panel-box row">
+            <div class="hp-index-panel-box row" id="index-panel-scroll">
                 <div class="col-md-4">
                     <div class="panel panel-default  center-block">
-                        <div class="hp-index-panel-up"><img src="http://bpic.588ku.com/back_pic/03/76/17/6857be75526c28f.jpg!/fh/300/quality/90/unsharp/true/compress/true" alt="图片无法显示"></div>
+                        <div class="hp-index-panel-up"><img
+                                src="http://bpic.588ku.com/back_pic/03/76/17/6857be75526c28f.jpg!/fh/300/quality/90/unsharp/true/compress/true"
+                                alt="图片无法显示"></div>
                         <div class="hp-index-panel-down">
                             <h3 class="hp-index-panel-box-title">博客</h3>
                             <p class="hp-index-panel-box-text">技术博客分享</p>
@@ -38,7 +41,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default  center-block">
-                        <div class="hp-index-panel-up"><img src="http://bpic.588ku.com/back_pic/03/58/04/9657a1ed394ec0a.jpg!r850/fw/800" alt="图片无法显示"></div>
+                        <div class="hp-index-panel-up"><img
+                                src="http://bpic.588ku.com/back_pic/03/58/04/9657a1ed394ec0a.jpg!r850/fw/800"
+                                alt="图片无法显示"></div>
                         <div class="hp-index-panel-down">
                             <h3 class="hp-index-panel-box-title">随笔</h3>
                             <p class="hp-index-panel-box-text">随笔一记</p>
@@ -48,7 +53,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default  center-block">
-                        <div class="hp-index-panel-up"><img src="http://img.lanrentuku.com/img/allimg/1203/5_120331110539_1.jpg" alt="图片无法显示"></div>
+                        <div class="hp-index-panel-up"><img
+                                src="http://t2.hddhhn.com/uploads/tu/201707/521/85.jpg" alt="图片无法显示"></div>
                         <div class="hp-index-panel-down">
                             <h3 class="hp-index-panel-box-title">Example</h3>
                             <p class="hp-index-panel-box-text">Something more...</p>
@@ -58,7 +64,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default  center-block">
-                        <div class="hp-index-panel-up"><img src="https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg" alt="图片无法显示"></div>
+                        <div class="hp-index-panel-up"><img
+                                src="http://bpic.588ku.com/back_pic/03/51/31/045790f4c07fe1e.jpg!/fh/300/quality/90/unsharp/true/compress/true"
+                                alt="图片无法显示"></div>
                         <div class="hp-index-panel-down">
                             <h3 class="hp-index-panel-box-title">Example</h3>
                             <p class="hp-index-panel-box-text">Something more...</p>
@@ -68,7 +76,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default  center-block">
-                        <div class="hp-index-panel-up"><img src="https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg" alt="图片无法显示"></div>
+                        <div class="hp-index-panel-up"><img
+                                src="http://bpic.588ku.com/back_pic/17/03/27/881de447412182fb8adbdd5a82d4f19b.jpg!/fh/300/quality/90/unsharp/true/compress/true"
+                                alt="图片无法显示"></div>
                         <div class="hp-index-panel-down">
                             <h3 class="hp-index-panel-box-title">Example</h3>
                             <p class="hp-index-panel-box-text">Something more...</p>
@@ -78,7 +88,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default  center-block">
-                        <div class="hp-index-panel-up"><img src="https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg" alt="图片无法显示"></div>
+                        <div class="hp-index-panel-up"><img
+                                src="https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg" alt="图片无法显示">
+                        </div>
                         <div class="hp-index-panel-down">
                             <h3 class="hp-index-panel-box-title">Example</h3>
                             <p class="hp-index-panel-box-text">Something more...</p>
@@ -97,6 +109,22 @@
             <h3>查看更多</h3>
         </div>
     </div>
+    <script>
+        $(function () {
+            //锚点滑动
+            $("#index-panel-scroll-button").click(function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var $target = $(this.hash);
+                    $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+                    if ($target.length) {
+                        var targetOffset = $target.offset().top;
+                        $('html,body').animate({scrollTop: targetOffset}, 500);
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
 </div>
 </body>
 </html>

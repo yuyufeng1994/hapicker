@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
     padding: 0 auto;
     background-color: #f2f2f2;
+    font-family: libre franklin,Helvetica,Arial,sans-serif;
 }
 
 .hp-content {
@@ -92,6 +93,9 @@ color: #0f0f0f;
     color: #212529;
     padding: 5rem;
 }
+.hp-footer a{
+    color: #212529;
+}
 
 .hp-page-breadcrumb{
     font-size: 17px;
@@ -146,7 +150,8 @@ color: #0f0f0f;
     margin-bottom:35px ;
 }
 
-.hp-index-text-box{
+.hp-index-text-box h4{
+    padding: 5px;
 }
 .hp-index-panel-down button{
     font-weight: 700;
