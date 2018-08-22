@@ -231,5 +231,6 @@
         </plugins>
     </build>
 
+    <!--打包时，先install common 和 persistence模块，再对整体package-->
 
 </project>

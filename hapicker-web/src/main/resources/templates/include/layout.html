@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="shortcut icon" th:href="@{/image/logo.png}"/>
     <title>layout</title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link th:href="@{/style/common.css}" rel="stylesheet" type="text/css"/>
 
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <script th:src="@{/script/common.js}"></script>
     <!--<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>-->
 </head>
@@ -61,7 +65,9 @@
                 <li><a href="https://github.com/yuyufeng1994" target="_blank">Github</a></li>
                 <li><a href="https://blog.csdn.net/qq_18860653" target="_blank">CSDN</a></li>
                 <li><a href="/about">关于</a></li>
-                <li><a href="/login">登录</a></li>
+                <li><a class="hp-cursor" onclick="javascript:toLoginPage()">登录</a></li>
+             <!--   <li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
+                        th:href="@{'/login?returnUrl='+${returnUrl}}">登录</a></li>-->
                 <li><a href="/register">注册</a></li>
                 <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -84,9 +90,17 @@
     <p>Hapicker is a project created and maintained by yuyufeng at Aliyun.</p>
     <p>Based on Bootstrap,Spring Cloud.</p>
     <p>@Hapicker 2018</p>
-    <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17023003号-3</a> </p>
+    <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17023003号-3</a></p>
 </footer>
-
+<form id="loginPageForm" action="/login" method="post" class="hidden">
+    <input type="hidden" name="returnUrl" id="loginPageFormreturnUrl">
+</form>
 
 </body>
+<script>
+    function toLoginPage() {
+        $("#loginPageFormreturnUrl").val(window.document.location.href);
+        $("#loginPageForm").submit();
+    }
+</script>
 </html>

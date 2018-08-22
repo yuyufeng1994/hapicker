@@ -11,25 +11,25 @@ spring:
       profile: dev
       name: base,${spring.application.name}
   datasource:
-      url: jdbc:mysql://106.14.13.212:3306/hapicker
-      username: root
-      password: yyf12345
-      driverClassName: com.mysql.jdbc.Driver
+      url: ${base.datasource.url}
+      username: ${base.datasource.username}
+      password: ${base.datasource.password}
+      driverClassName: ${base.datasource.driverClassName}
       # 使用druid数据源
-      type: com.alibaba.druid.pool.DruidDataSource
-      filters: stat
-      maxActive: 20
-      initialSize: 1
-      maxWait: 60000
-      minIdle: 1
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x'
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: false
-      maxOpenPreparedStatements: 20
+      type: ${base.datasource.type}
+      filters: ${base.datasource.filters}
+      maxActive: ${base.datasource.maxActive}
+      initialSize: ${base.datasource.initialSize}
+      maxWait: ${base.datasource.maxWait}
+      minIdle: ${base.datasource.minIdle}
+      timeBetweenEvictionRunsMillis: ${base.datasource.timeBetweenEvictionRunsMillis}
+      minEvictableIdleTimeMillis: ${base.datasource.minEvictableIdleTimeMillis}
+      validationQuery: ${base.datasource.validationQuery}
+      testWhileIdle: ${base.datasource.testWhileIdle}
+      testOnBorrow: ${base.datasource.testOnBorrow}
+      testOnReturn: ${base.datasource.testOnReturn}
+      poolPreparedStatements: ${base.datasource.poolPreparedStatements}
+      maxOpenPreparedStatements: ${base.datasource.maxOpenPreparedStatements}
 
 eureka:
   client:

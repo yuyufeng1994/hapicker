@@ -1,5 +1,6 @@
 package com.hapicker.web.config.properties;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
@@ -9,44 +10,53 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "spring.redis")
 public class RedisProperties {
 
-    private int database = 0;
+    @Value("${redis.database}")
+    private int database;
     /**
      * Redis服务器地址
      */
-    private String host = "106.14.13.212";
+    @Value("${redis.host}")
+    private String host;
     /**
      * Redis服务器连接端口
      */
-    private int port=6379;
+    @Value("${redis.port}")
+    private int port;
     /**
      * Redis服务器连接密码（默认为空）
      */
-    private String password="yyf12345";
+    @Value("${redis.password}")
+    private String password;
     /**
      * 连接池最大连接数（使用负值表示没有限制）
      */
-    private int maxTotal = 10000;
+    @Value("${redis.maxTotal}")
+    private int maxTotal;
     /**
      * 连接池最大阻塞等待时间（使用负值表示没有限制）
      */
-    private int maxWaitMillis = 1000;
+    @Value("${redis.maxWaitMillis}")
+    private int maxWaitMillis;
     /**
      * 连接池中的最大空闲连接
      */
-    private int maxIdle = 30;
+    @Value("${redis.maxIdle}")
+    private int maxIdle;
     /**
      * 连接池中的最小空闲连接
      */
-    private int minIdle = 5;
+    @Value("${redis.minIdle}")
+    private int minIdle;
     /**
      * 连接超时时间（毫秒）
      */
-    private int timeout = 1000;
+    @Value("${redis.timeout}")
+    private int timeout;
 
-
-    private boolean testOnBorrow = true;
-
-    private boolean testOnReturn = true;
+    @Value("${redis.testOnBorrow}")
+    private boolean testOnBorrow;
+    @Value("${redis.testOnReturn}")
+    private boolean testOnReturn;
 
 
     public int getDatabase() {

@@ -16,7 +16,7 @@ body {
     font-weight: 700;
     margin: 0;
     color: #ffffff;
-    height: 550px;
+    height: 600px;
 }
 
 .hp-jumbotron-btn {
@@ -193,13 +193,19 @@ color: #0f0f0f;
     margin: 0;
 }
 .hp-login-box-parent{
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 90px;
+    padding-right: 90px;
 }
 .hp-login-box{
     padding: 50px;
     color: #212529;
     background:none;
+}
+.hp-cursor{
+    cursor: pointer;
+}
+.hp-margin-none{
+    margin:0;
 }
 
 
