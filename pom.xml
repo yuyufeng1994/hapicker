@@ -214,14 +214,18 @@
                 <version>2.9.0</version>
             </dependency>
 
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.10.RELEASE</version>
+            </dependency>
 
         </dependencies>
 
     </dependencyManagement>
 
 
-    <build>
+   <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -229,7 +233,7 @@
                 <version>1.5.10.RELEASE</version>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
     <!--打包时，先install common 和 persistence模块，再对整体package-->
 
