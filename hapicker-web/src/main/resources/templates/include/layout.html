@@ -11,7 +11,7 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link th:href="@{/style/common.css}" rel="stylesheet" type="text/css"/>
 
-    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
@@ -51,7 +51,7 @@
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Separated link</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="/logout">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -65,21 +65,21 @@
                 <li><a href="https://github.com/yuyufeng1994" target="_blank">Github</a></li>
                 <li><a href="https://blog.csdn.net/qq_18860653" target="_blank">CSDN</a></li>
                 <li><a href="/about">关于</a></li>
-                <li><a class="hp-cursor" onclick="javascript:toLoginPage()">登录</a></li>
+                <li th:if="${SESSION_USER == null}"><a class="hp-cursor" onclick="javascript:requestWithReturnUrl('/login')">登录</a></li>
              <!--   <li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
                         th:href="@{'/login?returnUrl='+${returnUrl}}">登录</a></li>-->
-                <li><a href="/register">注册</a></li>
-                <!--<li class="dropdown">
+                <li th:if="${SESSION_USER == null}"><a href="/register">注册</a></li>
+                <li th:if="${SESSION_USER != null}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">个人中心 <span class="caret"></span></a>
+                       aria-expanded="false"><pi th:text="${SESSION_USER.userNick}"></pi><span class="caret" ></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">写博客</a></li>
                         <li><a href="#">修改个人信息</a></li>
                         <li><a href="#">消息</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a class="hp-cursor" href="javascript:requestWithReturnUrl('/logout')">退出</a></li>
                     </ul>
-                </li>-->
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -98,9 +98,11 @@
 
 </body>
 <script>
-    function toLoginPage() {
+    function requestWithReturnUrl(toUrl) {
+        $("#loginPageForm").attr("action", toUrl);
         $("#loginPageFormreturnUrl").val(window.document.location.href);
         $("#loginPageForm").submit();
     }
+
 </script>
 </html>

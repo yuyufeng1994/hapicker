@@ -1,12 +1,13 @@
 package com.hapicker.common.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author yuyufeng
  * @date 2018/8/6.
  */
-public class UserInfoDTO {
+public class UserInfoDTO implements Serializable{
     /**
      * 用户ID
      */
