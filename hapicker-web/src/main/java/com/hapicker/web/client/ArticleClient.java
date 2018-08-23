@@ -6,10 +6,7 @@ import com.hapicker.common.dto.CategoryInfoDTO;
 import com.hapicker.common.dto.RequestPageDTO;
 import com.hapicker.common.dto.ResponseDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ public interface ArticleClient {
      * @param requestPageDTO
      * @return
      */
-    @RequestMapping(value = "queryArticle", method = RequestMethod.POST)
+    @PostMapping(value = "queryArticle")
     ResponseDTO<PageInfo<ArticleInfoDTO>> queryArticle(@RequestBody RequestPageDTO<ArticleInfoDTO> requestPageDTO);
 
     /**
@@ -35,14 +32,14 @@ public interface ArticleClient {
      * @param id
      * @return
      */
-    @RequestMapping(value = "getArticle/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "getArticle/{id}")
     ResponseDTO<ArticleInfoDTO> getArticleByArticleId(@PathVariable("id") Integer id);
 
     /**
      * 获取类目
      * @return
      */
-    @RequestMapping(value = "listCategoryInfo", method = RequestMethod.GET)
+    @GetMapping(value = "listCategoryInfo")
     ResponseDTO<List<CategoryInfoDTO>> listCategoryInfo();
 
     /**
@@ -50,7 +47,7 @@ public interface ArticleClient {
      * @param requestPageDTO
      * @return
      */
-    @RequestMapping(value = "queryArticleByCategoryId", method = RequestMethod.POST)
+    @PostMapping(value = "queryArticleByCategoryId")
     ResponseDTO<PageInfo<ArticleInfoDTO>> listArticleByCategoryId(@RequestBody RequestPageDTO<Integer> requestPageDTO);
 
     /**
@@ -58,6 +55,6 @@ public interface ArticleClient {
      * @param categoryId
      * @return
      */
-    @RequestMapping(value = "category/{categoryId}", method = RequestMethod.GET)
+    @GetMapping(value = "category/{categoryId}")
     ResponseDTO<CategoryInfoDTO> getCategoryInfoById(@PathVariable("categoryId") Integer categoryId);
 }

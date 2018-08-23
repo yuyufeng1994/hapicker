@@ -3,6 +3,7 @@ package com.hapicker.web.client;
 import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.common.dto.UserInfoDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,9 +17,9 @@ import java.util.List;
 @RequestMapping(value = "user")
 @FeignClient(value = "hapicker-service")
 public interface UserClient {
-    @RequestMapping(value = "getUserInfo", method = RequestMethod.POST)
+    @PostMapping(value = "getUserInfo")
     ResponseDTO<UserInfoDTO> getUserInfo(@RequestBody UserInfoDTO userInfoDTO);
 
-    @RequestMapping(value = "queryUserInfo", method = RequestMethod.POST)
+    @PostMapping(value = "queryUserInfo")
     ResponseDTO<List<UserInfoDTO>> queryUserInfo(@RequestBody UserInfoDTO userInfoDTO);
 }
