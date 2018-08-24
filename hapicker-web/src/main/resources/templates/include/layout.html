@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="baidu-site-verification" content="QXn74GRNQg" />
     <link rel="shortcut icon" th:href="@{/image/logo.png}"/>
     <title>layout</title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
@@ -89,6 +90,7 @@
 <footer class="container-fluid hp-footer">
     <p>Hapicker is a project created and maintained by yuyufeng at Aliyun.</p>
     <p>Based on Bootstrap,Spring Cloud.</p>
+    <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1274548915'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1274548915%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></p>
     <p>@Hapicker 2018</p>
     <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17023003号-3</a></p>
 </footer>
@@ -103,6 +105,19 @@
         $("#loginPageFormreturnUrl").val(window.document.location.href);
         $("#loginPageForm").submit();
     }
+
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
 
 </script>
 </html>

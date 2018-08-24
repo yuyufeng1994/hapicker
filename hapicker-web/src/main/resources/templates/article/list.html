@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="include/layout">
 <head>
     <meta charset="UTF-8"/>
     <title th:text="${articleTypeName}+' - Hapicker - 发现快乐'"></title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
+    <meta name="keywords" th:content="${articleTypeName}"/>
+    <meta name="description" th:if="${category != null}"
+          th:content="${category.categoryName+' '+category.categoryBrief}"/>
 </head>
 <body>
 <div layout:fragment="content">
@@ -15,7 +18,10 @@
                 <li><a href="/">首页</a></li>
                 <li class="active" th:text="${articleTypeName}"></li>
             </ol>
-            <h3 th:if="${category != null}"><pi th:text="${category.categoryName}"></pi> <small th:text="${category.categoryBrief}"></small></h3>
+            <h3 th:if="${category != null}">
+                <pi th:text="${category.categoryName}"></pi>
+                <small th:text="${category.categoryBrief}"></small>
+            </h3>
         </div>
         <div class="col-md-9 hp-list-content hp-article-content-box">
             <!--文章列表-->
@@ -84,7 +90,7 @@
                 <div class="panel-body">
                     <h5>热门标签</h5>
                     <a class="label label-primary hp-article-category" th:each="cg : ${categoryList}"
-                          th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
+                       th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
                 </div>
             </div>
             <div class="panel panel-default">

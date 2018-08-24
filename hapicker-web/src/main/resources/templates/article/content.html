@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="include/layout">
 <head>
     <meta charset="UTF-8"/>
     <title th:text="${at.articleTitle+' - Hapicker -  发现快乐'}"></title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
+    <meta name="keywords" th:content="${at.articleTitle+' '+at.articleTypeName+' '+at.userNick}"/>
+    <meta name="description" th:content="${at.articleTitle+' '+at.articleBrief}"/>
+
 </head>
 <body>
 <div layout:fragment="content">
