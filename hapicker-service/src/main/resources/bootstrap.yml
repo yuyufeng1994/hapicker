@@ -32,6 +32,8 @@ spring:
       maxOpenPreparedStatements: ${base.datasource.maxOpenPreparedStatements}
 
 eureka:
+  instance:
+    hostname: 111.231.83.73
   client:
     service-url:
       defaultZone: ${base.eurekaUrl}
