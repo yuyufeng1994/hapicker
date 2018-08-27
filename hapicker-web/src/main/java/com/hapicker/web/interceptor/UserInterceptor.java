@@ -1,5 +1,10 @@
 package com.hapicker.web.interceptor;
 
+import com.hapicker.common.constant.SessionConstant;
+import com.hapicker.common.dto.UserInfoDTO;
+import com.hapicker.common.exception.BaseException;
+import com.hapicker.web.util.SessionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,10 +20,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class UserInterceptor implements HandlerInterceptor {
+    @Autowired
+    private SessionUtil sessionUtil;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String uri = request.getRequestURI();
-        System.out.println("UserInterceptor.preHandle " + uri);
+        UserInfoDTO userInfoDTO = (UserInfoDTO) sessionUtil.getSession(request, SessionConstant.SESSION_USER);
+        if (userInfoDTO == null) {
+            throw new BaseException(505, "无权访问");
+        }
         return true;
     }
 

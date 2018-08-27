@@ -65,14 +65,18 @@
                 <li><a href="https://github.com/yuyufeng1994" target="_blank">Github</a></li>
                 <li><a href="https://blog.csdn.net/qq_18860653" target="_blank">CSDN</a></li>
                 <li><a href="/about">关于</a></li>
-                <li th:if="${SESSION_USER == null}"><a class="hp-cursor" onclick="javascript:requestWithReturnUrl('/login')">登录</a></li>
-             <!--   <li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
-                        th:href="@{'/login?returnUrl='+${returnUrl}}">登录</a></li>-->
+                <li th:if="${SESSION_USER == null}"><a class="hp-cursor"
+                                                       onclick="javascript:requestWithReturnUrl('/login')">登录</a></li>
+                <!--   <li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
+                           th:href="@{'/login?returnUrl='+${returnUrl}}">登录</a></li>-->
                 <li th:if="${SESSION_USER == null}"><a href="/register">注册</a></li>
                 <li th:if="${SESSION_USER != null}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><pi th:text="${SESSION_USER.userNick}"></pi><span class="caret" ></span></a>
+                       aria-expanded="false">
+                        <pi th:text="${SESSION_USER.userNick}"></pi>
+                        <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a th:href="${'/user/'+SESSION_USER.userId+'/info'}">个人信息</a></li>
                         <li><a href="#">写博客</a></li>
                         <li><a href="#">修改个人信息</a></li>
                         <li><a href="#">消息</a></li>
@@ -89,7 +93,10 @@
 <footer class="container-fluid hp-footer">
     <p>Hapicker is a project created and maintained by yuyufeng at Aliyun.</p>
     <p>Based on Bootstrap,Spring Cloud.</p>
-    <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1274548915'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1274548915%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></p>
+    <p>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1274548915'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1274548915%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+    </p>
     <p>@Hapicker 2018</p>
     <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17023003号-3</a></p>
 </footer>
@@ -105,7 +112,7 @@
         $("#loginPageForm").submit();
     }
 
-    (function(){
+    (function () {
         var bp = document.createElement('script');
         var curProtocol = window.location.protocol.split(':')[0];
         if (curProtocol === 'https') {

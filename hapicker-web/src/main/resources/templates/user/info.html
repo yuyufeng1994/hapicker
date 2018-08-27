@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="include/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户 - Hapicker - 发现快乐</title>
+    <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="page-header hp-page-breadcrumb visible-md visible-lg">
+            <ol class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">个人信息</li>
+            </ol>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>个人信息</h3>
+                <table class="table">
+                    <tr>
+                        <th>头像</th>
+                        <td><img th:src="@{${userInfo.userAvatar}}" class="img-circle hp-user-avatar"></td>
+                    </tr>
+                    <tr>
+                        <th>用户ID</th>
+                        <td><p th:text="${userInfo.userId}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>用户名</th>
+                        <td><p th:text="${userInfo.userName}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>用户昵称</th>
+                        <td><p th:text="${userInfo.userNick}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>用户邮箱</th>
+                        <td><p th:text="${userInfo.userEmail}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>手机号码</th>
+                        <td><p th:text="${userInfo.userPhone}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>用户简介</th>
+                        <td><p th:text="${userInfo.userProfile}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>用户状态</th>
+                        <td><p th:text="${userInfo.userStatus}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>创建时间</th>
+                        <td><p th:text="${#dates.format(userInfo.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>更新时间</th>
+                        <td><p th:text="${#dates.format(userInfo.updateTime, 'yyyy年MM月dd日 HH:mm:ss')}"></p></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

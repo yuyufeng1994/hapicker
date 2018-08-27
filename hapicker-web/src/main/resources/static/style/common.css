@@ -207,6 +207,10 @@ color: #0f0f0f;
 .hp-margin-none{
     margin:0;
 }
+.hp-user-avatar{
+    width: 70px;
+    height: 70px;
+}
 
 
 @media (max-width:768px) {
