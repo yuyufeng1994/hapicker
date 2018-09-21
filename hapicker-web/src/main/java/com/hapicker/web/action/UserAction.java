@@ -28,4 +28,14 @@ public class UserAction {
         return "user/info";
 
     }
+
+    @RequestMapping(value = "/article/create", method = RequestMethod.GET)
+    String articleCreate(Model model, @PathVariable("userId") Integer userId) {
+        /*UserInfoDTO userInfo = new UserInfoDTO();
+        userInfo.setUserId(userId);
+        userInfo = userClient.getUserInfo(userInfo).getContent();
+        model.addAttribute("userInfo", userInfo);*/
+        return "user/article/create";
+
+    }
 }

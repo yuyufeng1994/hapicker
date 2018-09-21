@@ -29,6 +29,12 @@ public class IndexAction {
         return "index";
     }
 
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    String error() {
+        System.out.println(param);
+        return "error";
+    }
+
     @RequestMapping(value = "index", method = RequestMethod.GET)
     String index() {
         System.out.println(param);

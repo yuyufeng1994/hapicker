@@ -28,7 +28,7 @@ public class CookieUtil {
         Cookie[] cookies = httpServletRequest.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
-                System.out.println(cookies[i].getName() + " " + cookies[i].getDomain());
+//                System.out.println(cookies[i].getName() + " " + cookies[i].getDomain());
                 if (cookieName.equals(cookies[i].getName())) {
                     return cookies[i].getValue();
                 }

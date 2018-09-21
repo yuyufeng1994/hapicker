@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>凤凰里</title>
+        <link rel="stylesheet" href="css/skin.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+        <meta http-equiv="expires" content="-1">
+        <meta name="author" content="Klose">
+    </head>
+    <body>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page01.png">
+                    <div class="content">
+                        <div class="logo f4 o1"><img src="images/logo.png"/></div>
+                        <div class="sign f4 o2"><img src="images/sign.png"/></div>
+                        <div class="title r4 o3"><img src="images/title01.png"/></div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page02.png">
+                    <div class="content">
+                        <div class="title02 f4 o1"><img src="images/title02.png"/></div>
+                        <div class="ground02 f1 o2"><img src="images/ground02.png"/></div>
+                        <div class="sign02 f2 o2"><img src="images/sign02.png"/></div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page02.png">
+                    <div class="content">
+                        <div class="title03 f3 o1"><img src="images/title03.png" /></div>
+                        <div class="ground03 f1 o2"><img src="images/ground03.png" /></div>
+                        <div class="sign03 f4 o3"><img src="images/sign03.png" /></div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page04.png">
+                    <div class="content">
+                        <div class="title04 f1 o1"><img src="images/title04.png" /></div>
+                        <div class="ground04 f2 o2"><img src="images/ground04.png" /></div>
+                        <div class="sign04 f4 o3"><img src="images/sign04.png" /></div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page05.png">
+                    <div class="content">
+                        <div class="ground05 f1 o1"><img src="images/ground05.png" /></div>
+                        <div class="title05 f2 o2"><img src="images/title05.png" /></div>
+                        <div class="sign05 f4 o4"><img src="images/sign05.png" /></div>
+                        <div class="intr05 f1 o3"><img src="images/intr05.png" /></div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page06.png">
+                    <div class="content">
+                        <div class="ground06 f3 o1"><img src="images/ground06.png" /></div>
+                        <div class="title06 f2 o4"><img src="images/title06.png" /></div>
+                        <div class="sign06 f4 o2"><img src="images/sign06.png" /></div>
+                        <div class="intr06 f1 o3"><img src="images/intr06.png" /></div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="bg loadimg" src="images/page07.png">
+                    <div class="content">
+                        <div class="title07 f4 o1"><img src="images/title07.png"/></div>
+                        <div class="sign07 f5 o2"><img src="images/sign07.png"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="up"></div>
+        <div id="audio_btn">
+            <div id="yinfu"></div>
+            <audio id="music1" src="http://wxserver.knowway.cn/runheqiandaohu/music/music5.mp3" preload="" loop="loop"></audio>
+        </div>
+        <div class="yujiazai bg">
+            <div id="loadwz">正在加载中......<span>0</span>%</div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./js/idangerous.swiper-2.0.min.js"></script>
+<script type="text/javascript" src="./js/swiper.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<!-- <script type="text/javascript" src="./js/jquery.imgpreload.min.js"></script> -->
+<script type="text/javascript" src="./js/resLoader.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+    $(function(){
+    //图片加载
+    var loader = new resLoader({
+        resources : [
+            './images/page01.png',
+            './images/logo.png',
+            './images/sign.png',
+            './images/title01.png',
+            './images/page02.png',
+            './images/title02.png',
+            './images/ground02.png',
+            './images/sign02.png',
+            './images/title03.png',
+            './images/ground03.png',
+            './images/sign03.png',
+            './images/page04.png',
+            './images/title04.png',
+            './images/page04.png',
+            './images/ground04.png',
+            './images/sign04.png',
+            './images/page05.png',
+            './images/ground05.png',
+            './images/title05.png',
+            './images/sign05.png',
+            './images/intr05.png',
+            './images/page06.png',
+            './images/ground06.png',
+            './images/title06.png',
+            './images/sign06.png',
+            './images/intr06.png',
+            './images/page07.png',
+            './images/title07.png',
+            './images/sign07.png',
+            'http://wxserver.knowway.cn/runheqiandaohu/music/music5.mp3'
+        ],
+        onStart : function(total){
+        },
+        onProgress : function(current, total){
+            console.log(current, total)
+            var percent = current/total*100;
+            $('#loadwz span').text(parseInt(percent,10));
+
+        },
+        onComplete : function(total){
+            $('.yujiazai').css('display', 'none');
+            var mySwiper = $('.swiper-container').swiper({
+                mode: 'vertical',
+                loop: false,
+                speed: 500,
+                onSlideChangeEnd: function() {
+                    $(".swiper-slide").removeClass("on");
+                    setTimeout(function() {
+                        $(".swiper-slide-active").addClass("on");
+                    }, 300)
+                    if (!$(".swiper-slide-active").next().length)
+                    {
+                        $(".up").hide();
+                    }
+                    else
+                    {
+                        $(".up").show();
+                    }
+                }
+            })
+            $(".loading").addClass("loadingremove");
+            setTimeout(function() {
+                $(".swiper-slide-active").addClass("on");
+            }, 300)
+            $(".up").show();
+            //mySwiper.swipeTo(8);
+           /* $(".sound")[0].addEventListener('touchstart', function(event) {
+                if ($(this).hasClass("soundstop"))
+                {
+                    document.getElementById("music").play();
+                    $(this).removeClass("soundstop");
+                }
+                else
+                {
+                    document.getElementById("music").pause();
+                    $(this).addClass("soundstop");
+                }
+            })*/
+            $(".ipt").each(function() {
+                var obj = $(this);
+                this.addEventListener('touchstart', function(event) {
+                    autofocus = setTimeout(function() {
+                        obj.focus();
+                    }, 300)
+                })
+            });
+            setTimeout(function(){
+                $('#yinfu').addClass('rotate');
+                $('#audio_btn').addClass('yinfugif');
+                var voice = document.getElementById('music1');
+                voice.src = "http://wxserver.knowway.cn/runheqiandaohu/music/music5.mp3"; 
+                voice.play();
+                //判斷 WeixinJSBridge 是否存在
+                if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+                    voice.play();
+                } else {
+                    //監聽客户端抛出事件"WeixinJSBridgeReady"
+                    if (document.addEventListener) {
+                        document.addEventListener("WeixinJSBridgeReady", function() {
+                            voice.play();
+                        }, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent("WeixinJSBridgeReady", function() {
+                            voice.play();
+                        });
+                        document.attachEvent("onWeixinJSBridgeReady", function() {
+                            voice.play();
+                        });
+                    }
+                }
+
+                //voiceStatu用來記録狀態,使 touchstart 事件只能觸發一次有效,避免與 click 事件衝突
+                var voiceStatu = true;
+                //监听 touchstart 事件进而调用 <audio> 元素提供的 play() 方法播放音频
+                document.addEventListener("touchstart", function(e) {
+                    if (voiceStatu) {
+                        voice.play();
+                        voiceStatu = false;
+                    }
+                }, false);
+
+                wx.config({
+            // 配置信息, 即使不正确也能使用 wx.ready
+            　　　　debug: false,
+            　　　　appId: '',
+            　　　　timestamp: 1,
+            　　　　nonceStr: '',
+            　　　　signature: '',
+            　　　　jsApiList: []
+            　　});
+            　　wx.ready(function() {
+            　　　　document.getElementById('music1').play();
+            　　});
+
+            },500);
+        }
+    })
+    loader.start();
+});
+
+</script>
+<!--<script type="text/javascript" src="js/weixinapi.js"></script>-->

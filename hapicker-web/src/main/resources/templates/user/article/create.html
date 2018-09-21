@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="include/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>写博客 - Hapicker - 发现快乐</title>
+    <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{/vendor/wang/wangEditor.min.js}"></script>
+    <style>
+        .toolbar {
+            border: 1px solid #ccc;
+        }
+        .text {
+            border: 1px solid #ccc;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="page-header hp-page-breadcrumb visible-md visible-lg">
+            <ol class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">写博客</li>
+            </ol>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form action="/help/doCreate" method="post" id="article-form">
+                    <div class="form-group">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" placeholder="标题" name="title" th:value="${'1'}"/><!--${doc?.title}-->
+                        <p class="help-block">请输入标题</p>
+                    </div>
+                    <div class="form-group">
+                        <label>正文</label>
+                        <div id="article-toolbar" class="toolbar"></div>
+                        <div id="article-editor" class="text" th:utext="${'<p>11111</p>'}"></div>
+                        <p class="help-block">请输入正文</p>
+                        <!--<input type="hidden" value="" name="blogContent" id="blogContent" required>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="brief">摘要</label>
+                        <textarea  class="form-control" id="brief" ></textarea>
+                        <p class="help-block">请输入摘要</p>
+                    </div>
+                    <div class="form-group" style="float: right">
+                        <button type="submit" class="btn btn-default" style="width: 200px;" onclick="doSubmit()">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //富文本编辑器
+        var E = window.wangEditor
+        var editor = new E('#article-toolbar', '#article-editor')
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'quote',  // 引用
+            'emoticon',  // 表情
+            'image',  // 插入图片
+            'table',  // 表格
+            'video',  // 插入视频
+            'code',  // 插入代码
+            'undo',  // 撤销
+            'redo'  // 重复
+        ]
+        // 配置服务器端地址
+        editor.customConfig.uploadImgServer = '/article/upload'
+        editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
+        editor.customConfig.uploadImgHooks = {
+            before: function (xhr, editor, files) {
+                // 请求发送之前
+            },
+            success: function (xhr, editor, result) {
+                // 上传成功之后
+                // result 是服务器端返回的结果
+                console.log(result.data[0])
+            },
+            fail: function (xhr, editor, result) {
+                // 上传失败之后
+                // result 是服务器端返回的结果
+                console.log(result)
+            },
+            error: function (xhr, editor) {
+                // 请求发生错误
+            },
+            timeout: function (xhr, editor) {
+                // 请求超时
+            }
+        }
+        editor.create()
+    </script>
+</div>
+</body>
+</html>
