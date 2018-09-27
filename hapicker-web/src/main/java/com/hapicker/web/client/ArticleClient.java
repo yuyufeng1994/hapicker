@@ -57,4 +57,12 @@ public interface ArticleClient {
      */
     @GetMapping(value = "category/{categoryId}")
     ResponseDTO<CategoryInfoDTO> getCategoryInfoById(@PathVariable("categoryId") Integer categoryId);
+
+    /**
+     * 插入文章
+     * @param articleInfoDTO
+     * @return
+     */
+    @PostMapping(value = "insertArticle")
+    ResponseDTO insertArticle(@RequestBody ArticleInfoDTO articleInfoDTO);
 }

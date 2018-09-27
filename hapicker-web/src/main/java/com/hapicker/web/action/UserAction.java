@@ -1,6 +1,9 @@
 package com.hapicker.web.action;
 
+import com.hapicker.common.constant.StatusEnum;
+import com.hapicker.common.dto.ArticleInfoDTO;
 import com.hapicker.common.dto.UserInfoDTO;
+import com.hapicker.web.client.ArticleClient;
 import com.hapicker.web.client.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserAction {
     @Autowired
     private UserClient userClient;
+    @Autowired
+    private ArticleClient articleClient;
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     String info(Model model, @PathVariable("userId") Integer userId) {
@@ -36,6 +41,15 @@ public class UserAction {
         userInfo = userClient.getUserInfo(userInfo).getContent();
         model.addAttribute("userInfo", userInfo);*/
         return "user/article/create";
+
+    }
+    @RequestMapping(value = "/article/doCreate", method = RequestMethod.POST)
+    String articleDoCreate(Model model, @PathVariable("userId") Integer userId, ArticleInfoDTO articleInfoDTO) {
+        articleInfoDTO.setUserId(userId);
+        articleInfoDTO.setArticleStatus(StatusEnum.NORMAL.getKey());
+        System.out.println(articleInfoDTO);
+        articleClient.insertArticle(articleInfoDTO);
+        return "user/article/message";
 
     }
 }

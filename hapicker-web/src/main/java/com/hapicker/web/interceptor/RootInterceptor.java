@@ -31,7 +31,9 @@ public class RootInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         UserInfoDTO userInfoDTO = (UserInfoDTO) sessionUtil.getSession(request, SessionConstant.SESSION_USER);
-        modelAndView.addObject(SessionConstant.SESSION_USER, userInfoDTO);
+        if (userInfoDTO != null && modelAndView != null) {
+            modelAndView.addObject(SessionConstant.SESSION_USER, userInfoDTO);
+        }
     }
 
     @Override

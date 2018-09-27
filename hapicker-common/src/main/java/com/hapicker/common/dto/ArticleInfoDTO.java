@@ -340,5 +340,26 @@ public class ArticleInfoDTO {
         this.categorys = categorys;
     }
 
-
+    @Override
+    public String toString() {
+        return "ArticleInfoDTO{" +
+                "articleId=" + articleId +
+                ", articleTitle='" + articleTitle + '\'' +
+                ", articleBrief='" + articleBrief + '\'' +
+                ", articleCover='" + articleCover + '\'' +
+                ", articleSource='" + articleSource + '\'' +
+                ", articleType='" + articleType + '\'' +
+                ", articleTypeName='" + articleTypeName + '\'' +
+                ", articleStatus=" + articleStatus +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userNick='" + userNick + '\'' +
+                ", userAvatar='" + userAvatar + '\'' +
+                ", userProfile='" + userProfile + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", articleContent='" + articleContent + '\'' +
+                ", categorys=" + categorys +
+                '}';
+    }
 }

@@ -97,10 +97,11 @@ public class ArticleAction {
      * @return
      */
     @RequestMapping(value = "/stream/{uuid}/{ext}", method = RequestMethod.GET)
-    public String thumbnail(HttpServletRequest request, HttpSession session, HttpServletResponse response,
-                            @PathVariable("uuid") String uuid, @PathVariable("ext") String ext) {
+    @ResponseBody
+    public void thumbnail(HttpServletRequest request, HttpSession session, HttpServletResponse response,
+                          @PathVariable("uuid") String uuid, @PathVariable("ext") String ext) {
         try {
-            InputStream inputStream = new FileInputStream(path + uuid + "." + ext);
+            InputStream inputStream = new FileInputStream(path + "/" + uuid + "." + ext);
             OutputStream os = response.getOutputStream();
             byte[] b = new byte[1024];
             int length;
@@ -111,9 +112,10 @@ public class ArticleAction {
             os.close();
             inputStream.close();
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
     /**
@@ -124,9 +126,8 @@ public class ArticleAction {
      * @throws IOException
      */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public
     @ResponseBody
-    UploadResult doUpload(HttpServletRequest request) throws IOException {
+    public UploadResult doUpload(HttpServletRequest request) throws IOException {
         File doc = new File(path);
         if (!doc.exists()) {
             doc.mkdirs();
@@ -140,7 +141,7 @@ public class ArticleAction {
             String uuid = UUID.randomUUID().toString();
             String ext = StringUtils.getFilenameExtension(fileName);
             MultipartFile file = fileMap.get(fileName);
-            File getFile = new File(path + uuid + "." + ext);
+            File getFile = new File(path + "/" + uuid + "." + ext);
             file.transferTo(getFile);
             strArr[i] = "/article/stream/" + uuid + "/" + ext;
             i++;

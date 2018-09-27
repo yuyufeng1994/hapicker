@@ -6,6 +6,7 @@ spring:
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+    check-template: true
   cloud:
     config:  # git管理配置
       uri: http://111.231.83.73:8888/
@@ -27,6 +28,6 @@ eureka:
 #        service-id: hpWeb #配置中心的servieId，即服务名。
 
 upload:
-  path: h://test
+  path: /opt/upload/
 
 

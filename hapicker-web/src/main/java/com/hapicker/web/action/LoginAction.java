@@ -82,11 +82,10 @@ public class LoginAction {
                 model.addAttribute("errorMessage", "密码不正确");
                 return "login";
             }
-            String uuid = UUIDUtil.getUUIDString();
             sessionUtil.setSession(httpServletResponse, userInfo, SessionConstant.SESSION_USER);
-            System.out.println(userInfo);
-            System.out.println(rememberMe);
-            System.out.println(salt);
+//            System.out.println(userInfo);
+//            System.out.println(rememberMe);
+//            System.out.println(salt);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "用户不存在");
             return "login";

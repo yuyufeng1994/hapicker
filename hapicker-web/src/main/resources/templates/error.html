@@ -20,6 +20,9 @@
                     <strong th:if="${code != null}" th:text="${'系统出错了：'+code}"></strong>
                     <h3 th:if="${code == null}" th:text="${'系统出错了!'}"></h3>
                     <pi th:if="${msg != null}" th:text="${msg}"></pi>
+                    <pi th:if="${status != null}" th:text="${status}"></pi>
+                    <pi th:if="${error != null}" th:text="${error}"></pi>
+                    <pi th:if="${message != null}" th:text="${message}"></pi>
                 </div>
             </div>
         </div>

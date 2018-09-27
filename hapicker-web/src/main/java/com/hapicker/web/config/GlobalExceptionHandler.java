@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public String errorHandler(Exception ex, Model model) {
+        ex.printStackTrace();
         System.out.println("GlobalExceptionHandler.errorHandler");
         model.addAttribute("code", 500);
         model.addAttribute("msg", ex.getMessage());
