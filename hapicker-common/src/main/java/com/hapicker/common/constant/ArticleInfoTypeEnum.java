@@ -1,5 +1,8 @@
 package com.hapicker.common.constant;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Article分类
  *
@@ -43,4 +46,6 @@ public enum ArticleInfoTypeEnum {
     public void setValue(String value) {
         this.value = value;
     }
+
+
 }

@@ -155,4 +155,78 @@
             ac.category_id = #{categoryId,jdbcType=INTEGER}
         AND article_status = 0
     </select>
+
+    <insert id="insertSelectiveReturnKey" useGeneratedKeys="true" keyProperty="articleId"  parameterType="com.hapicker.model.ArticleInfo">
+        insert into article_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="articleTitle != null">
+                article_title,
+            </if>
+            <if test="articleBrief != null">
+                article_brief,
+            </if>
+            <if test="articleSource != null">
+                article_source,
+            </if>
+            <if test="articleCover != null">
+                article_cover,
+            </if>
+            <if test="articleType != null">
+                article_type,
+            </if>
+            <if test="articleStatus != null">
+                article_status,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="articleContent != null">
+                article_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                #{articleId,jdbcType=INTEGER},
+            </if>
+            <if test="articleTitle != null">
+                #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleBrief != null">
+                #{articleBrief,jdbcType=VARCHAR},
+            </if>
+            <if test="articleSource != null">
+                #{articleSource,jdbcType=VARCHAR},
+            </if>
+            <if test="articleCover != null">
+                #{articleCover,jdbcType=VARCHAR},
+            </if>
+            <if test="articleType != null">
+                #{articleType,jdbcType=VARCHAR},
+            </if>
+            <if test="articleStatus != null">
+                #{articleStatus,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>

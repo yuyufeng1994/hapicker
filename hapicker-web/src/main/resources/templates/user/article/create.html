@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>写博客 - Hapicker - 发现快乐</title>
-    <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" th:src="@{/vendor/wang/wangEditor.min.js}"></script>
     <style>
         .toolbar {
             border: 1px solid #ccc;
         }
+
         .text {
             border: 1px solid #ccc;
             height: 400px;
@@ -30,56 +31,57 @@
                 <form th:action="${'/user/'+SESSION_USER.userId+'/article/doCreate'}" method="post" id="article-form">
                     <div class="form-group">
                         <label for="articleTitle">标题</label>
-                        <input type="text" class="form-control" id="articleTitle" placeholder="标题" name="articleTitle" th:value="${'标题1'}"/><!--${doc?.title}-->
+                        <input type="text" class="form-control" id="articleTitle" placeholder="标题" name="articleTitle"
+                               th:value="${'在此输入标题'}"/><!--${doc?.title}-->
                         <p class="help-block">请输入标题</p>
                     </div>
                     <div class="form-group">
                         <label>正文</label>
                         <div id="article-toolbar" class="toolbar"></div>
-                        <div id="article-editor" class="text" th:utext="${'<p>11111</p>'}"></div>
+                        <div id="article-editor" class="text" th:utext="${'<p>在此输入正文</p>'}"></div>
                         <p class="help-block">请输入正文</p>
-                        <!--<input type="hidden" value="" name="blogContent" id="blogContent" required>-->
                     </div>
                     <div class="form-group">
                         <label for="articleBrief">摘要</label>
-                        <textarea  class="form-control" id="articleBrief" name="articleBrief">1请输入摘要</textarea>
-                        <p class="help-block">请输入摘要</p>
+                        <textarea class="form-control" id="articleBrief" name="articleBrief">在此输入摘要</textarea>
+                        <p class="help-block">请输入摘要 [<a href="##">自动提取</a>]</p>
                     </div>
                     <div class="form-group">
                         <label for="articleSource">来源</label>
-                        <input type="text" class="form-control" id="articleSource" placeholder="标题" name="articleSource" th:value="${'1'}"/><!--${doc?.title}-->
-                        <p class="help-block">请输入来源</p>
+                        <input type="text" class="form-control" id="articleSource" placeholder="标题" name="articleSource"
+                               th:value="${'原创'}"/><!--${doc?.title}-->
+                        <p class="help-block">如转载，请标注文章来源</p>
                     </div>
                     <div class="form-group">
                         <label for="articleCover">封面</label>
-                        <input type="text" class="form-control" id="articleCover" placeholder="标题" name="articleCover" th:value="${'https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg'}"/><!--${doc?.title}-->
+                        <input type="text" class="form-control" id="articleCover" placeholder="标题" name="articleCover"
+                               th:value="${'https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg'}"/>
+                        <!--${doc?.title}-->
                         <p class="help-block">请输入封面地址</p>
                     </div>
                     <div class="form-group">
-                        <label for="articleType">文章类型</label>
-                        <select id="articleType" name="articleType" class="form-control">
-                            <option value="blog">博客</option>
-                            <option value="essay">随笔</option>
-                        </select>
+                        <div class="radio-inline" th:each="item,iterStat: ${articleInfoTypes}">
+                            <label>
+                                <input type="radio" name="articleType" th:value="${item.key}"
+                                       th:checked="${iterStat.index == 0 ? true : false}"><span
+                                    th:text="${item.value}"></span>
+                            </label>
+                        </div>
                         <p class="help-block">请选择文章类型</p>
                     </div>
                     <div class="form-group">
                         <label>文章类别</label>
                         <br/>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+                        <label class="checkbox-inline" th:each="item: ${categoryInfos}" th:title="${item.categoryBrief}">
+                            <input type="checkbox"  name="categoryId" th:value="${item.categoryId}"><span th:text="${item.categoryName}"></span>
                         </label>
                         <p class="help-block">请选择文章类别</p>
                     </div>
                     <div class="form-group" style="float: right">
                         <input type="hidden" name="articleContent" id="article-content">
-                        <button type="button"  class="btn btn-default" style="width: 200px;" onclick="doArticleSubmit()">提交</button>
+                        <button type="button" class="btn btn-default" style="width: 200px;" onclick="doArticleSubmit()">
+                            提交
+                        </button>
                     </div>
                 </form>
             </div>
@@ -134,7 +136,7 @@
             }
         }
         editor.create()
-        
+
         function doArticleSubmit() {
             var content = editor.txt.html().trim();
             $("#article-content").val(content);

@@ -70,7 +70,7 @@
                                                        onclick="javascript:requestWithReturnUrl('/login')">登录</a></li>
                 <!--   <li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
                            th:href="@{'/login?returnUrl='+${returnUrl}}">登录</a></li>-->
-                <li th:if="${SESSION_USER == null}"><a href="/register">注册</a></li>
+                <!--<li th:if="${SESSION_USER == null}"><a href="/register">注册</a></li>-->
                 <li th:if="${SESSION_USER != null}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
@@ -98,8 +98,9 @@
         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cspan id='cnzz_stat_icon_1274548915'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1274548915%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
     </p>
+    <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17023003号-3</a>  <img th:src="@{/image/beian.png}" /><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33048202000230" target="_blank">浙公网安备 33048202000230号</a></p>
     <p>@Hapicker哈皮客 2018</p>
-    <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17023003号-3</a></p>
+
 </footer>
 <form id="loginPageForm" action="/login" method="post" class="hidden">
     <input type="hidden" name="returnUrl" id="loginPageFormreturnUrl">

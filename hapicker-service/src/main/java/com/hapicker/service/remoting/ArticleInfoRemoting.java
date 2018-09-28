@@ -8,10 +8,13 @@ import com.hapicker.common.dto.ArticleInfoDTO;
 import com.hapicker.common.dto.CategoryInfoDTO;
 import com.hapicker.common.dto.RequestPageDTO;
 import com.hapicker.common.dto.ResponseDTO;
+import com.hapicker.mapper.ArticleCategoryInfoMapper;
 import com.hapicker.mapper.ArticleInfoMapper;
 import com.hapicker.mapper.CategoryInfoMapper;
+import com.hapicker.model.ArticleCategoryInfo;
 import com.hapicker.model.ArticleInfo;
 import com.hapicker.model.CategoryInfo;
+import com.hapicker.service.intef.IArticleInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -37,6 +40,12 @@ public class ArticleInfoRemoting {
     @Autowired
     private ArticleInfoMapper articleInfoMapper;
 
+    @Autowired
+    private ArticleCategoryInfoMapper articleCategoryInfoMapper;
+
+    @Autowired
+    private IArticleInfoService articleInfoService;
+
     @ApiOperation(value = "Article类目列表", httpMethod = "GET")
     @RequestMapping(value = "listCategoryInfo", method = RequestMethod.GET)
     ResponseDTO<List<CategoryInfoDTO>> listCategoryInfo() {
@@ -44,7 +53,7 @@ public class ArticleInfoRemoting {
         List<CategoryInfoDTO> categoryInfoDTOList = new ArrayList<>();
         for (CategoryInfo categoryInfo : categoryInfoList) {
             CategoryInfoDTO categoryInfoDTO = new CategoryInfoDTO();
-            BeanUtils.copyProperties(categoryInfo,categoryInfoDTO);
+            BeanUtils.copyProperties(categoryInfo, categoryInfoDTO);
             categoryInfoDTOList.add(categoryInfoDTO);
         }
         return ResponseDTO.success(categoryInfoDTOList);
@@ -63,7 +72,7 @@ public class ArticleInfoRemoting {
     @RequestMapping(value = "queryArticle", method = RequestMethod.POST)
     ResponseDTO<PageInfo<ArticleInfoDTO>> listArticle(@RequestBody RequestPageDTO<ArticleInfoDTO> requestPageDTO) {
         ArticleInfo articleInfo = new ArticleInfo();
-        BeanUtils.copyProperties(requestPageDTO.getContent(),articleInfo);
+        BeanUtils.copyProperties(requestPageDTO.getContent(), articleInfo);
         PageHelper.startPage(requestPageDTO.getPageNo(), requestPageDTO.getPageSize(), requestPageDTO.getOrderBy());
         articleInfo.setArticleStatus(StatusEnum.NORMAL.getKey());
         List<ArticleInfoDTO> articleInfoList = articleInfoMapper.selectList(articleInfo);
@@ -84,11 +93,7 @@ public class ArticleInfoRemoting {
     @ApiOperation(value = "插入Article", httpMethod = "POST")
     @RequestMapping(value = "insertArticle", method = RequestMethod.POST)
     ResponseDTO insertArticle(@RequestBody ArticleInfoDTO articleInfoDTO) {
-        ArticleInfo articleInfo = new ArticleInfo();
-        BeanUtils.copyProperties(articleInfoDTO, articleInfo);
-        articleInfo.setUpdateTime(new Date());
-        articleInfo.setCreateTime(new Date());
-        articleInfoMapper.insertSelective(articleInfo);
+        articleInfoService.insertArticle(articleInfoDTO);
         return ResponseDTO.success();
     }
 
@@ -116,10 +121,9 @@ public class ArticleInfoRemoting {
     ResponseDTO<CategoryInfoDTO> getCategoryInfoById(@PathVariable("categoryId") Integer categoryId) {
         CategoryInfo categoryInfo = categoryInfoMapper.selectByPrimaryKey(categoryId);
         CategoryInfoDTO categoryInfoDTO = new CategoryInfoDTO();
-        BeanUtils.copyProperties(categoryInfo,categoryInfoDTO);
+        BeanUtils.copyProperties(categoryInfo, categoryInfoDTO);
         return ResponseDTO.success(categoryInfoDTO);
     }
-
 
 
 }

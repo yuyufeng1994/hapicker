@@ -31,4 +31,11 @@ public interface ArticleInfoMapper extends Mapper<ArticleInfo> {
      * @return
      */
     List<ArticleInfoDTO> selectListByCategoryId(@Param("categoryId") Integer categoryId);
+
+    /**
+     * 插入之后返回主键
+     * @param articleInfo
+     * @return
+     */
+    int insertSelectiveReturnKey(ArticleInfo articleInfo);
 }
