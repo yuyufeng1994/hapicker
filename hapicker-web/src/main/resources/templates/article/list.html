@@ -44,6 +44,7 @@
                                 <pi th:text="${' '+at.userNick}"></pi>
                                 <i class="glyphicon glyphicon-time"></i>
                                 <pi th:text="${' '+#dates.format(at.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></pi>
+                                <a th:if="${SESSION_USER != null && SESSION_USER.userId==at.userId}" th:href="${'/user/'+SESSION_USER.userId+'/article/update/'+at.articleId}">编辑</a>
                             </p>
                         </div>
                     </div>

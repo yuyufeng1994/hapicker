@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,12 +37,20 @@ public class ArticleInfoServiceIImpl implements IArticleInfoService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void insertArticle(ArticleInfoDTO articleInfoDTO) {
-
         ArticleInfo articleInfo = new ArticleInfo();
         BeanUtils.copyProperties(articleInfoDTO, articleInfo);
         articleInfo.setUpdateTime(new Date());
-        articleInfo.setCreateTime(new Date());
-        articleInfoMapper.insertSelectiveReturnKey(articleInfo);
+        if(StringUtils.isEmpty(articleInfo.getArticleId())){
+            articleInfo.setCreateTime(new Date());
+            articleInfoMapper.insertSelectiveReturnKey(articleInfo);
+        }else{
+            articleInfo.setCreateTime(null);
+            articleInfoMapper.updateByPrimaryKeySelective(articleInfo);
+            ArticleCategoryInfo acRecord = new ArticleCategoryInfo();
+            acRecord.setArticleId(articleInfo.getArticleId());
+            articleCategoryInfoMapper.delete(acRecord);
+        }
+
         //插入类目
         List<CategoryInfoDTO> categoryInfoDTOList = articleInfoDTO.getCategorys();
         List<ArticleCategoryInfo> articleCategoryInfoList = new ArrayList<>();
@@ -54,6 +63,5 @@ public class ArticleInfoServiceIImpl implements IArticleInfoService {
             }
             articleCategoryInfoMapper.insertBatch(articleCategoryInfoList);
         }
-
     }
 }

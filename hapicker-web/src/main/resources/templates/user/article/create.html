@@ -3,7 +3,8 @@
       layout:decorator="include/layout">
 <head>
     <meta charset="UTF-8"/>
-    <title>写博客 - Hapicker - 发现快乐</title>
+    <title th:if="${articleInfo==null}">写文章 - Hapicker - 发现快乐</title>
+    <title th:if="${articleInfo!=null}">编辑文章 - Hapicker - 发现快乐</title>
     <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" th:src="@{/vendor/wang/wangEditor.min.js}"></script>
     <style>
@@ -23,7 +24,8 @@
         <div class="page-header hp-page-breadcrumb visible-md visible-lg">
             <ol class="breadcrumb">
                 <li><a href="/">首页</a></li>
-                <li class="active">写博客</li>
+                <li class="active" th:if="${articleInfo==null}"">写文章</li>
+                <li class="active" th:if="${articleInfo!=null}">编辑文章</li>
             </ol>
         </div>
         <div class="panel panel-default">
@@ -32,38 +34,67 @@
                     <div class="form-group">
                         <label for="articleTitle">标题</label>
                         <input type="text" class="form-control" id="articleTitle" placeholder="标题" name="articleTitle"
-                               th:value="${'在此输入标题'}"/><!--${doc?.title}-->
+                               th:value="${articleInfo?.articleTitle}"/>
                         <p class="help-block">请输入标题</p>
                     </div>
                     <div class="form-group">
                         <label>正文</label>
                         <div id="article-toolbar" class="toolbar"></div>
-                        <div id="article-editor" class="text" th:utext="${'<p>在此输入正文</p>'}"></div>
+                        <div id="article-editor" class="text" th:utext="${articleInfo?.articleContent}"></div>
                         <p class="help-block">请输入正文</p>
                     </div>
                     <div class="form-group">
                         <label for="articleBrief">摘要</label>
-                        <textarea class="form-control" id="articleBrief" name="articleBrief" placeholder="在此输入摘要"></textarea>
-                        <p class="help-block">请输入摘要 [<a href="##">自动提取</a>]</p>
+                        <textarea class="form-control" id="articleBrief" name="articleBrief" placeholder="在此输入摘要"
+                                  th:text="${articleInfo?.articleBrief}"></textarea>
+                        <p class="help-block">请输入摘要 [<a href="javascript:defaultArticleBrief()">自动提取</a>]</p>
                     </div>
                     <div class="form-group">
                         <label for="articleSource">来源</label>
                         <input type="text" class="form-control" id="articleSource" placeholder="标题" name="articleSource"
-                               th:value="${'原创'}"/><!--${doc?.title}-->
-                        <p class="help-block">如转载，请标注文章来源</p>
+                               th:value="${articleInfo?.articleSource}"/>
+                        <p class="help-block">如转载，请标注文章来源 [<a href="javascript:defaultAticleSource()">原创</a>]</p>
+
                     </div>
                     <div class="form-group">
                         <label for="articleCover">封面</label>
                         <input type="text" class="form-control" id="articleCover" placeholder="标题" name="articleCover"
-                               th:value="${'https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg'}"/>
+                               th:value="${articleInfo?.articleCover}"/>
                         <!--${doc?.title}-->
-                        <p class="help-block">请输入封面地址</p>
+                        <p class="help-block">请输入封面地址 [<a href="javascript:defaultArticleCover()">默认</a>] [<a href="javascript:showArticleCover()" class="hp-img-preview">预览</a>]</p>
+                        <div class="thumbnail hp-panel-img hp-article-cover-show" id="articleCoverShow" ><img src="" alt="图片无法显示"/></div>
                     </div>
+                    <script>
+                        function defaultArticleBrief() {
+                            var content = editor.txt.text().trim();
+                            if(content.length >100){
+                                content = content.substring(0, 100);
+                            }
+                            $("#articleBrief").val(content);
+                        }
+                        function defaultAticleSource() {
+                            $("#articleSource").val("原创");
+                        }
+                        function defaultArticleCover() {
+                            $("#articleCover").val("https://goss.veer.com/creative/vcg/veer/800water/veer-105331422.jpg");
+                            showArticleCover();
+                        }
+                        function showArticleCover() {
+                            var imageUrl =  $("#articleCover").val();
+                            $("#articleCoverShow").find("img").attr("src",imageUrl);
+                            $("#articleCoverShow").show();
+                        }
+                    </script>
                     <div class="form-group">
                         <div class="radio-inline" th:each="item,iterStat: ${articleInfoTypes}">
-                            <label>
+                            <label th:if="${articleInfo?.articleType == null}">
                                 <input type="radio" name="articleType" th:value="${item.key}"
                                        th:checked="${iterStat.index == 0 ? true : false}"><span
+                                    th:text="${item.value}"></span>
+                            </label>
+                            <label th:if="${articleInfo?.articleType != null}">
+                                <input type="radio" name="articleType" th:value="${item.key}"
+                                       th:checked="${item.key == articleInfo.articleType ? true : false}"><span
                                     th:text="${item.value}"></span>
                             </label>
                         </div>
@@ -72,13 +103,17 @@
                     <div class="form-group">
                         <label>文章类别</label>
                         <br/>
-                        <label class="checkbox-inline" th:each="item: ${categoryInfos}" th:title="${item.categoryBrief}">
-                            <input type="checkbox"  name="categoryId" th:value="${item.categoryId}"><span th:text="${item.categoryName}"></span>
+                        <label class="checkbox-inline" th:each="item: ${categoryInfos}"
+                               th:title="${item.categoryBrief}">
+                            <input type="checkbox" name="categoryId" th:value="${item.categoryId}"
+                                   th:checked="${item.checked}"><span th:text="${item.categoryName}"></span>
                         </label>
                         <p class="help-block">请选择文章类别</p>
                     </div>
+
                     <div class="form-group" style="float: right">
                         <input type="hidden" name="articleContent" id="article-content">
+                        <input type="hidden" name="articleId" id="article-id" th:value="${articleInfo?.articleId}">
                         <button type="button" class="btn btn-default" style="width: 200px;" onclick="doArticleSubmit()">
                             提交
                         </button>
@@ -142,6 +177,8 @@
             $("#article-content").val(content);
             $("#article-form").submit();
         }
+
+
     </script>
 </div>
 </body>

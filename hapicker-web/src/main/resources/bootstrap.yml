@@ -28,6 +28,6 @@ eureka:
 #        service-id: hpWeb #配置中心的servieId，即服务名。
 
 upload:
-  path: /opt/upload/
+  path: h://test
 
 

@@ -63,6 +63,7 @@
                         标签：<a class="label label-primary hp-article-category" th:each="cg : ${at.categorys}"
                               th:text="${cg.categoryName}" th:href="@{'/article/category/'+${cg.categoryId}+'/1'}"></a>
                     </p>
+                    <a th:if="${SESSION_USER != null && SESSION_USER.userId==at.userId}" th:href="${'/user/'+SESSION_USER.userId+'/article/update/'+at.articleId}">编辑</a>
                 </div>
             </div>
             <div class="panel panel-default">

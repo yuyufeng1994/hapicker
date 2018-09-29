@@ -8,6 +8,15 @@ public class CategoryInfoDTO {
     private Integer categoryId;
     private String categoryName;
     private String categoryBrief;
+    private Boolean checked = false;
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
 
     public Integer getCategoryId() {
         return categoryId;

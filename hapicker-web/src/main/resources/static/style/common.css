@@ -212,6 +212,16 @@ color: #0f0f0f;
     height: 70px;
 }
 
+.hp-article-cover-show{
+    width:200px;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    display: none;
+}
+.hp-img-preview{
+
+}
 
 @media (max-width:768px) {
     .hp-jumbotron-header {
