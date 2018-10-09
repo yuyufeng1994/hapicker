@@ -78,7 +78,7 @@ public class UserAction {
     @RequestMapping(value = "/article/doCreate", method = RequestMethod.POST)
     String articleDoCreate(Model model, @PathVariable("userId") Integer userId, ArticleInfoDTO articleInfoDTO, Integer[] categoryId) {
         List<CategoryInfoDTO> categorys = articleInfoDTO.getCategorys();
-        if (categorys != null && categoryId.length > 0) {
+        if (categoryId != null && categoryId.length > 0) {
             for (Integer item : categoryId) {
                 CategoryInfoDTO categoryInfoDTO = new CategoryInfoDTO();
                 categoryInfoDTO.setCategoryId(item);
