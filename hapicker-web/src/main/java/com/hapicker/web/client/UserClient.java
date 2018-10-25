@@ -1,6 +1,7 @@
 package com.hapicker.web.client;
 
 import com.hapicker.common.dto.ResponseDTO;
+import com.hapicker.common.dto.UserConnectInfoDTO;
 import com.hapicker.common.dto.UserInfoDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,4 +23,10 @@ public interface UserClient {
 
     @PostMapping(value = "queryUserInfo")
     ResponseDTO<List<UserInfoDTO>> queryUserInfo(@RequestBody UserInfoDTO userInfoDTO);
+
+    @RequestMapping(value = "getUserConnectInfo", method = RequestMethod.POST)
+    ResponseDTO<UserConnectInfoDTO> getUserConnectInfo(@RequestBody UserConnectInfoDTO userConnectInfo);
+
+    @RequestMapping(value = "insertUserInfo", method = RequestMethod.POST)
+    ResponseDTO<UserInfoDTO> insertUserInfo(@RequestBody UserInfoDTO userInfo);
 }

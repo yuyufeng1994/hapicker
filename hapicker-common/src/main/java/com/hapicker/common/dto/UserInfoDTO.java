@@ -63,6 +63,34 @@ public class UserInfoDTO implements Serializable{
      */
     private Date updateTime;
 
+
+    /**
+     * 平台
+     */
+    private String platformKey;
+
+    /**
+     * 平台码
+     */
+    private String openId;
+
+
+    public String getPlatformKey() {
+        return platformKey;
+    }
+
+    public void setPlatformKey(String platformKey) {
+        this.platformKey = platformKey;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
     public Integer getUserId() {
         return userId;
     }

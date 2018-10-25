@@ -1,27 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hapicker.mapper.UserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.hapicker.model.UserInfo">
-    <!--
-      WARNING - @mbg.generated
-    -->
-      <id column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <result column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_nick" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_avatar" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_profile" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_pwd" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <result column="user_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <result column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <result column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    user_id, user_name, user_nick, user_email, user_phone, user_avatar, user_profile,user_pwd,
-    user_status, create_time, update_time
-  </sql>
+    <resultMap id="BaseResultMap" type="com.hapicker.model.UserInfo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="user_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_nick" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_avatar" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_profile" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_pwd" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="user_status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <result column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        user_id, user_name, user_nick, user_email, user_phone, user_avatar, user_profile,user_pwd,
+        user_status, create_time, update_time
+    </sql>
+    <insert id="insertSelectiveWidthGenerateKey" useGeneratedKeys="true" keyProperty="userId" >
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userNick != null">
+                user_nick,
+            </if>
+            <if test="userEmail != null">
+                user_email,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userAvatar != null">
+                user_avatar,
+            </if>
+            <if test="userProfile != null">
+                user_profile,
+            </if>
+            <if test="userPwd != null">
+                user_pwd,
+            </if>
+            <if test="userStatus != null">
+                user_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userNick != null">
+                #{userNick,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userAvatar != null">
+                #{userAvatar,jdbcType=VARCHAR},
+            </if>
+            <if test="userProfile != null">
+                #{userProfile,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwd != null">
+                #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 </mapper>

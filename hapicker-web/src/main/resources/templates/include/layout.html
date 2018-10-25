@@ -65,7 +65,7 @@
                 <li><a href="/about">关于</a></li>
                 <li th:if="${SESSION_USER == null}"><a class="hp-cursor"
                                                        onclick="javascript:requestWithReturnUrl('/login')">登录</a></li>
-                <!--   <li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
+                <!--<li th:with="returnUrl=${#httpServletRequest.getContextPath()}"><a
                            th:href="@{'/login?returnUrl='+${returnUrl}}">登录</a></li>-->
                 <!--<li th:if="${SESSION_USER == null}"><a href="/register">注册</a></li>-->
                 <li th:if="${SESSION_USER != null}" class="dropdown">

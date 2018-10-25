@@ -51,6 +51,10 @@
                                 </div>
                                 <input name="returnUrl" type="hidden" th:value="${returnUrl}">
                                 <button type="button" class="btn btn-default btn-block" onclick="doSubmit()">登录</button>
+                                <p style="text-align: center;color: #ff3b30;margin: 0;" id="p-tips"></p>
+                                <p style="font-size: 15px;color: #666;text-align: left;margin-top: 30px; margin-right: 100px">快捷登录：<a
+                                        onclick="doTencentLogin()"><img
+                                        th:src="@{'/image/qq_logo.png'}"></a></p>
                             </form>
                             <script>
 
@@ -83,6 +87,27 @@
                                         $("#groupUserPwd").removeClass('has-error').addClass('has-success').find('span').html('<i class="glyphicon glyphicon-ok-sign"></i> 正确')
                                     }
                                     return true;
+                                }
+
+                                function doTencentLogin() {
+                                    //以下为按钮点击事件的逻辑。注意这里要重新打开窗口
+                                    //否则后面跳转到QQ登录，授权页面时会直接缩小当前浏览器的窗口，而不是打开新窗口
+                                    var A = window.open("https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101516738&redirect_uri=https%3a%2f%2fwww.hapicker.com%2fdoCallbackByTencent&state=hapicker_scope", "TencentLogin", "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+                                    var loop = setInterval(function () {
+                                        if (A.closed) {
+                                            clearInterval(loop);
+                                            $.get("/hasLogined", function (result) {
+                                                if (result.success == true) {
+                                                    $("#p-tips").html("<i class='glyphicon glyphicon-ok-sign'></i> 通过qq登录成功").css("color", "green").fadeIn();
+                                                    setTimeout(function () {
+                                                        window.location.href = '/';
+                                                    }, 1000);
+                                                } else {
+                                                    $("#p-tips").html("<i class='glyphicon glyphicon-info-sign'></i>  通过qq登录失败").fadeIn();
+                                                }
+                                            })
+                                        }
+                                    }, 300);
                                 }
                             </script>
                         </div>

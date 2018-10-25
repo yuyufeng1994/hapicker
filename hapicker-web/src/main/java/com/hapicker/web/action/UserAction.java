@@ -1,13 +1,16 @@
 package com.hapicker.web.action;
 
 import com.hapicker.common.constant.ArticleInfoTypeEnum;
+import com.hapicker.common.constant.SessionConstant;
 import com.hapicker.common.constant.StatusEnum;
 import com.hapicker.common.dto.ArticleInfoDTO;
 import com.hapicker.common.dto.CategoryInfoDTO;
 import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.common.dto.UserInfoDTO;
+import com.hapicker.common.exception.BaseException;
 import com.hapicker.web.client.ArticleClient;
 import com.hapicker.web.client.UserClient;
+import com.hapicker.web.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,6 +36,9 @@ public class UserAction {
     @Autowired
     private ArticleClient articleClient;
 
+    @Autowired
+    private SessionUtil sessionUtil;
+
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     String info(Model model, @PathVariable("userId") Integer userId) {
         UserInfoDTO userInfo = new UserInfoDTO();
@@ -43,7 +50,12 @@ public class UserAction {
     }
 
     @RequestMapping(value = "/article/create", method = RequestMethod.GET)
-    String articleCreate(Model model, @PathVariable("userId") Integer userId) {
+    String articleCreate(Model model, @PathVariable("userId") Integer userId, HttpServletRequest request) {
+        UserInfoDTO userInfoDTO = (UserInfoDTO) sessionUtil.getSession(request, SessionConstant.SESSION_USER);
+        if(userInfoDTO.getUserStatus() != 1){
+            throw new BaseException(505, "没有权限");
+        }
+
         Map<String, String> ArticleInfoTypeEnumMap = new LinkedHashMap<>(10);
         for (ArticleInfoTypeEnum item : ArticleInfoTypeEnum.values()) {
             ArticleInfoTypeEnumMap.put(item.getKey(), item.getValue());
@@ -55,7 +67,12 @@ public class UserAction {
     }
 
     @RequestMapping(value = "/article/update/{articleId}", method = RequestMethod.GET)
-    String articleUpdate(Model model, @PathVariable("userId") Integer userId, @PathVariable("articleId") Integer articleId) {
+    String articleUpdate(Model model, @PathVariable("userId") Integer userId, @PathVariable("articleId") Integer articleId, HttpServletRequest request) {
+        UserInfoDTO userInfoDTO = (UserInfoDTO) sessionUtil.getSession(request, SessionConstant.SESSION_USER);
+        if(userInfoDTO.getUserStatus() != 1){
+            throw new BaseException(505, "没有权限");
+        }
+
         ArticleInfoDTO articleInfo = articleClient.getArticleByArticleId(articleId).getContent();
         Map<String, String> ArticleInfoTypeEnumMap = new LinkedHashMap<>(10);
         for (ArticleInfoTypeEnum item : ArticleInfoTypeEnum.values()) {
@@ -76,7 +93,12 @@ public class UserAction {
     }
 
     @RequestMapping(value = "/article/doCreate", method = RequestMethod.POST)
-    String articleDoCreate(Model model, @PathVariable("userId") Integer userId, ArticleInfoDTO articleInfoDTO, Integer[] categoryId) {
+    String articleDoCreate(Model model, @PathVariable("userId") Integer userId, ArticleInfoDTO articleInfoDTO, Integer[] categoryId, HttpServletRequest request) {
+        UserInfoDTO userInfoDTO = (UserInfoDTO) sessionUtil.getSession(request, SessionConstant.SESSION_USER);
+        if(userInfoDTO.getUserStatus() != 1){
+            throw new BaseException(505, "没有权限");
+        }
+
         List<CategoryInfoDTO> categorys = articleInfoDTO.getCategorys();
         if (categoryId != null && categoryId.length > 0) {
             for (Integer item : categoryId) {
