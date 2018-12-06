@@ -7,9 +7,9 @@ package com.hapicker.common.constant;
 public class ExceptionCode {
 
     //没有权限
-    public final static String NO_PERMISSION = "505";
+    public final static int NO_PERMISSION = 505;
     //没有登录
-    public final static String NO_LOGIN = "506";
+    public final static int NO_LOGIN = 506;
 
 
 }
