@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hapicker-web:war">
+    <output-path>$PROJECT_DIR$/hapicker-web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>hapicker-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="hapicker-web.war">
+      <element id="artifact" artifact-name="hapicker-web:war exploded" />
+    </root>
+  </artifact>
+</component>

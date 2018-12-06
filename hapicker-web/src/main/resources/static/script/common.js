@@ -5,7 +5,7 @@ var validateUtil = {
         return reg.test(str);
     },
     checkAccount: function (str) {
-        if(str.length > 50){
+        if (str.length > 50) {
             return false;
         }
         var reg = /^\w{5,17}$/
@@ -14,5 +14,24 @@ var validateUtil = {
     checkPwd: function (str) {
         var reg = /^\w{5,17}$/
         return reg.test(str);
+    }
+}
+var dateUtil = {
+    getTodayString: function (incrDay) {
+        if(incrDay == null){
+            incrDay = 0;
+        }
+        var day = new Date()
+        day.setTime(day.getTime() + incrDay * 24 * 60 * 60 * 1000);
+        var year = day.getFullYear();       //年
+        var month = day.getMonth() + 1;     //月
+        var day = day.getDate();            //日
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        return year + '-' + month + '-' + day;
     }
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="include/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>汽车票 - Hapicker - 发现快乐</title>
+    <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css"/>
+    <script src="/vendor/wang/wangEditor.min.js"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="page-header hp-page-breadcrumb visible-md visible-lg">
+            <ol class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">汽车票</li>
+            </ol>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">出发</span>
+                                <input type="text" class="form-control" placeholder="出发"
+                                       aria-describedby="sizing-addon1" value="杭州" id="search-departure">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-3 -->
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon2">到达</span>
+                                <input type="text" class="form-control" placeholder="到达"
+                                       aria-describedby="sizing-addon2" value="平湖" id="search-destination">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-3 -->
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon3">日期</span>
+                                <input type="date" class="form-control" placeholder="日期"
+                                       aria-describedby="sizing-addon3" value="" id="search-date">
+                                <script>
+                                    //日期设置为明天
+                                    $("#search-date").val(dateUtil.getTodayString(1));
+                                </script>
+                                <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" id="search-button"
+                                        onclick="searchScheduleBus()">搜索</button>
+
+                              </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-3 -->
+                    </div><!-- /.row -->
+                </div>
+                <hr/>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>出发时间</th>
+                        <th>出发</th>
+                        <th>到达</th>
+                        <th>票价</th>
+                        <th>余票</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="result-tbody">
+                    <!--<tr><td colspan='6'>车次查询中...</td></tr>-->
+                    </tbody>
+                    <script>
+                        function searchScheduleBus() {
+                            $("#result-tbody").html("<tr><td colspan='6'>车次查询中...</td></tr>");
+                            var params = {
+                                departure: $("#search-departure").val(),
+                                destination: $("#search-destination").val(),
+                                busDate: $("#search-date").val()
+                            }
+
+                            $.ajax({
+                                url: "/bus/querySchedule",
+                                type: 'POST',
+                                data: JSON.stringify(params),
+                                async: true,
+                                contentType: "application/json",
+                                dataType: "json",
+                                //            xhrFields: {
+                                //                withCredentials: true
+                                //            },
+                                beforeSend: function () {
+                                    $("#result-tbody").html("<tr><td colspan='6'>车次查询中...</td></tr>");
+                                },
+                                success: function (res) {
+                                    // $("#result-tbody").html("<tr><td colspan='6'>解析结果中...</td></tr>");
+                                    if (res.success == true) {
+                                        var _trs = '';
+                                        for (var i = 0; i < res.content.length; i++) {
+                                            var _tr = '<tr>' +
+                                                '<td>' + res.content[i].busTime + '</td>' +
+                                                '<td>' + res.content[i].departure + '</td>' +
+                                                '<td>' + res.content[i].destination + '</td>' +
+                                                '<td>' + res.content[i].ticketPrice + '</td>' +
+                                                '<td>' + res.content[i].ticketLeft + '</td>' +
+                                                '<td>' + '<p>查看详情</p>' + '</td>' +
+                                                '</tr>';
+                                            _trs += _tr;
+                                        }
+                                        if (res.content.length == 0) {
+                                            $("#result-tbody").html("<tr><td colspan='6'>车次未找到</td></tr>");
+                                        } else {
+                                            $("#result-tbody").html(_trs);
+                                        }
+                                    } else {
+                                        $("#result-tbody").html("<tr><td colspan='6'>'+res.msg+'</td></tr>");
+                                    }
+
+                                },
+                                error: function (res) {
+                                    console.log(res)
+                                }
+                            });
+                        }
+                    </script>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
