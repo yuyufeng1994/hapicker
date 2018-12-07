@@ -1,6 +1,5 @@
 package com.hapicker.service.remoting;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hapicker.common.constant.StatusEnum;
@@ -11,7 +10,6 @@ import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.mapper.ArticleCategoryInfoMapper;
 import com.hapicker.mapper.ArticleInfoMapper;
 import com.hapicker.mapper.CategoryInfoMapper;
-import com.hapicker.model.ArticleCategoryInfo;
 import com.hapicker.model.ArticleInfo;
 import com.hapicker.model.CategoryInfo;
 import com.hapicker.service.intef.IArticleInfoService;
@@ -71,12 +69,7 @@ public class ArticleInfoRemoting {
     @ApiOperation(value = "查询Article列表", httpMethod = "POST")
     @RequestMapping(value = "queryArticle", method = RequestMethod.POST)
     ResponseDTO<PageInfo<ArticleInfoDTO>> listArticle(@RequestBody RequestPageDTO<ArticleInfoDTO> requestPageDTO) {
-        ArticleInfo articleInfo = new ArticleInfo();
-        BeanUtils.copyProperties(requestPageDTO.getContent(), articleInfo);
-        PageHelper.startPage(requestPageDTO.getPageNo(), requestPageDTO.getPageSize(), requestPageDTO.getOrderBy());
-        articleInfo.setArticleStatus(StatusEnum.NORMAL.getKey());
-        List<ArticleInfoDTO> articleInfoList = articleInfoMapper.selectList(articleInfo);
-        PageInfo<ArticleInfoDTO> articleInfoPageInfo = new PageInfo<>(articleInfoList);
+        PageInfo<ArticleInfoDTO> articleInfoPageInfo = articleInfoService.listArticle(requestPageDTO);
         return ResponseDTO.success(articleInfoPageInfo);
     }
 

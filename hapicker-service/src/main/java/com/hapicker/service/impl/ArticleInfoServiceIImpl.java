@@ -1,7 +1,11 @@
 package com.hapicker.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hapicker.common.constant.StatusEnum;
 import com.hapicker.common.dto.ArticleInfoDTO;
 import com.hapicker.common.dto.CategoryInfoDTO;
+import com.hapicker.common.dto.RequestPageDTO;
 import com.hapicker.mapper.ArticleCategoryInfoMapper;
 import com.hapicker.mapper.ArticleInfoMapper;
 import com.hapicker.mapper.CategoryInfoMapper;
@@ -63,5 +67,16 @@ public class ArticleInfoServiceIImpl implements IArticleInfoService {
             }
             articleCategoryInfoMapper.insertBatch(articleCategoryInfoList);
         }
+    }
+
+    @Override
+    public PageInfo<ArticleInfoDTO> listArticle(RequestPageDTO<ArticleInfoDTO> requestPageDTO) {
+        ArticleInfo articleInfo = new ArticleInfo();
+        BeanUtils.copyProperties(requestPageDTO.getContent(), articleInfo);
+        PageHelper.startPage(requestPageDTO.getPageNo(), requestPageDTO.getPageSize(), requestPageDTO.getOrderBy());
+        articleInfo.setArticleStatus(StatusEnum.NORMAL.getKey());
+        List<ArticleInfoDTO> articleInfoList = articleInfoMapper.selectList(articleInfo);
+        PageInfo<ArticleInfoDTO> articleInfoPageInfo = new PageInfo<>(articleInfoList);
+        return articleInfoPageInfo;
     }
 }

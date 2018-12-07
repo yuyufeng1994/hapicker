@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hapicker.mapper.BusWarningInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hapicker.model.BusWarningInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="bus_warning_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="bus_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="departure" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="destination" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="bus_date" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ticket_left" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="warning_times" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="warning_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    bus_warning_id, bus_no, departure, destination, bus_date, ticket_left, warning_times, 
+    user_id, warning_status, create_time, update_time
+  </sql>
+</mapper>

@@ -9,6 +9,7 @@ spring:
       uri: http://111.231.83.73:8888/
       label: master
       profile: dev
+#      profile: local
       name: base,${spring.application.name}
   datasource:
       url: ${base.datasource.url}
@@ -34,6 +35,7 @@ spring:
 eureka:
   instance:
     hostname: 111.231.83.73
+#    hostname: 127.0.0.1
   client:
     service-url:
       defaultZone: ${base.eurekaUrl}

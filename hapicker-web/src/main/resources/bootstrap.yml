@@ -12,6 +12,7 @@ spring:
       uri: http://111.231.83.73:8888/
       label: master
       profile: dev
+#      profile: local
       name: base,${spring.application.name}
 management:
   security:

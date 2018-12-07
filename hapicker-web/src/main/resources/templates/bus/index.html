@@ -6,6 +6,9 @@
     <title>汽车票 - Hapicker - 发现快乐</title>
     <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css"/>
     <script src="/vendor/wang/wangEditor.min.js"></script>
+    <style>
+
+    </style>
 
 </head>
 <body>
@@ -20,7 +23,9 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="alert alert-warning" role="alert"><i class="glyphicon glyphicon-warning-sign"></i> 目前支持浙江省内汽车票查询</div>
+                <div class="alert alert-warning" role="alert"><i class="glyphicon glyphicon-warning-sign"></i>
+                    目前支持浙江省内汽车票查询
+                </div>
                 <div>
                     <div class="row">
                         <div class="col-md-4">
@@ -64,7 +69,7 @@
                         <th>到达</th>
                         <th>票价</th>
                         <th>余票</th>
-                        <th></th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="result-tbody">
@@ -97,13 +102,22 @@
                                     if (res.success == true) {
                                         var _trs = '';
                                         for (var i = 0; i < res.content.length; i++) {
+                                            // console.log(res.content[i])
+                                            var paramBusNo = "'" + res.content[i].busNo + "'"
+                                            var paramDeparture = "'" + res.content[i].departure + "'"
+                                            var paramDestination = "'" + res.content[i].destination + "'"
+                                            var paramBusDate = "'" + res.content[i].busDate + "'"
                                             var _tr = '<tr>' +
                                                 '<td>' + res.content[i].busTime + '</td>' +
                                                 '<td>' + res.content[i].departure + '</td>' +
                                                 '<td>' + res.content[i].destination + '</td>' +
                                                 '<td>' + res.content[i].ticketPrice + '</td>' +
                                                 '<td>' + res.content[i].ticketLeft + '</td>' +
-                                                '<td>' + '<p>查看详情</p>' + '</td>' +
+                                                '<td>' + '<a href="javascript:scheduleWarning(' + paramBusNo + ','
+                                                + paramDeparture + ','
+                                                + paramDestination + ','
+                                                + paramBusDate + ''
+                                                + ')">车次预警</a>' + '</td>' +
                                                 '</tr>';
                                             _trs += _tr;
                                         }
@@ -121,6 +135,37 @@
                                     console.log(res)
                                 }
                             });
+                        }
+
+                        function scheduleWarning(busNo, departure, destination, busDate) {
+                            var params = {
+                                busNo: busNo,
+                                departure: departure,
+                                destination: destination,
+                                busDate: busDate
+                            }
+
+                            $.ajax({
+                                url: "/bus/insertWarningBus",
+                                type: 'POST',
+                                data: JSON.stringify(params),
+                                async: true,
+                                contentType: "application/json",
+                                dataType: "json",
+                                //            xhrFields: {
+                                //                withCredentials: true
+                                //            },
+                                success: function (res) {
+                                    alert(res.msg)
+                                    if (!res.success && confirm("立即登录")) {
+                                        requestWithReturnUrl('/login')
+                                    }
+                                },
+                                error: function (res) {
+                                    alert('请求失败！ ' + res.msg)
+                                }
+                            })
+
                         }
                     </script>
                 </table>
