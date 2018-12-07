@@ -34,7 +34,6 @@ public class BusService {
         Map<String, String> headers = new HashMap<>();
         boolean hasNextPage = true;
         while (hasNextPage) {
-
             hasNextPage = false;
             HttpResponse response = HttpUtils.doGet(host, path, "GET", headers, querys);
             String result = EntityUtils.toString(response.getEntity());
@@ -58,13 +57,12 @@ public class BusService {
                     scheduleBus.setTicketPrice(innerObject.getString("fullPrice"));
                     scheduleBus.setTicketLeft(innerObject.getString("remainSeat"));
                     scheduleBus.setBusNo(innerObject.getString("busId"));
-                    scheduleBus.setDataFrom("http://bus.bababus.com");
+                    scheduleBus.setDataFrom("<a href='"+host+"' target='_blank'>巴巴快巴</a>");
                     ServiceBusDetailDTOList.add(scheduleBus);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         return ServiceBusDetailDTOList;
     }

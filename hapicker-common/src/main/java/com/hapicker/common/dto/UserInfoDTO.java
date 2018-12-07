@@ -1,5 +1,7 @@
 package com.hapicker.common.dto;
 
+import com.hapicker.common.constant.StatusEnum;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -149,6 +151,10 @@ public class UserInfoDTO implements Serializable{
 
     public Integer getUserStatus() {
         return userStatus;
+    }
+
+    public String getUserStatusString() {
+        return StatusEnum.getValue(getUserStatus());
     }
 
     public void setUserStatus(Integer userStatus) {

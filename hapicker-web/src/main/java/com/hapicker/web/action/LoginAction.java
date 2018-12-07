@@ -2,6 +2,7 @@ package com.hapicker.web.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hapicker.common.constant.SessionConstant;
+import com.hapicker.common.constant.StatusEnum;
 import com.hapicker.common.constant.UserConnectInfoPlatformEnum;
 import com.hapicker.common.dto.ResponseDTO;
 import com.hapicker.common.dto.ResponseJson;
@@ -209,7 +210,7 @@ public class LoginAction {
         UserInfoDTO userInfo = new UserInfoDTO();
         userInfo.setUserNick(userName);
         userInfo.setUserAvatar(userFigure);
-        userInfo.setUserStatus(0);
+        userInfo.setUserStatus(StatusEnum.NORMAL.getKey());
 
         userInfo.setPlatformKey(UserConnectInfoPlatformEnum.TENCENT_QQ.getKey());
         userInfo.setOpenId(openId);

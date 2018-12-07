@@ -6,6 +6,7 @@ import com.hapicker.service.intef.IBusWarningService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,13 @@ public class BusWarningRemoting {
     @ApiOperation(value = "插入", httpMethod = "POST")
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     ResponseDTO insert(@RequestBody BusWarningInfoDTO busWarningInfoDTO) {
-        busWarningService.insert(busWarningInfoDTO);
+        try {
+            busWarningService.insert(busWarningInfoDTO);
+        } catch (DuplicateKeyException e) {
+            return ResponseDTO.fail("车次已存在");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseDTO.success();
     }
 

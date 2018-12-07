@@ -1,5 +1,6 @@
 package com.hapicker.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hapicker.common.constant.BusWarningStatusEnum;
@@ -63,7 +64,8 @@ public class BusWarningServiceImpl implements IBusWarningService {
         BeanUtils.copyProperties(requestPageDTO.getContent(), busWarningInfo);
         PageHelper.startPage(requestPageDTO.getPageNo(), requestPageDTO.getPageSize(), requestPageDTO.getOrderBy());
         List<BusWarningInfo> busWarningInfoList = busWarningInfoMapper.select(busWarningInfo);
-        List<BusWarningInfoDTO> busWarningInfoDTOList = new ArrayList<>();
+        PageInfo<BusWarningInfo> busWarningInfoPageInfo = new PageInfo<>(busWarningInfoList);
+        Page<BusWarningInfoDTO> busWarningInfoDTOList = new Page<>(requestPageDTO.getPageNo(),requestPageDTO.getPageSize());
         if (busWarningInfoList != null) {
             for (BusWarningInfo warningInfo : busWarningInfoList) {
                 BusWarningInfoDTO busWarningInfoDTO = new BusWarningInfoDTO();
@@ -71,6 +73,7 @@ public class BusWarningServiceImpl implements IBusWarningService {
                 busWarningInfoDTOList.add(busWarningInfoDTO);
             }
         }
+        busWarningInfoDTOList.setTotal(busWarningInfoPageInfo.getTotal());
         PageInfo<BusWarningInfoDTO> busWarningInfoDTOPageInfo = new PageInfo<>(busWarningInfoDTOList);
         return busWarningInfoDTOPageInfo;
     }

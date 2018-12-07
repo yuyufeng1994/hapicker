@@ -1,5 +1,7 @@
 package com.hapicker.common.dto;
 
+import com.hapicker.common.constant.BusWarningStatusEnum;
+
 import java.util.Date;
 
 public class BusWarningInfoDTO {
@@ -28,6 +30,8 @@ public class BusWarningInfoDTO {
      */
     private String busDate;
 
+    private String busTime;
+
     /**
      * 剩余票数
      */
@@ -54,7 +58,6 @@ public class BusWarningInfoDTO {
      * 更新时间
      */
     private Date updateTime;
-
 
 
     public BusWarningInfoDTO() {
@@ -210,6 +213,10 @@ public class BusWarningInfoDTO {
         return warningStatus;
     }
 
+    public String getWarningStatusString() {
+        return BusWarningStatusEnum.getValue(getWarningStatus());
+    }
+
     /**
      * 设置状态(0:监听中，1:监听成功，2:监听失败，3:放弃监听)
      *
@@ -253,5 +260,13 @@ public class BusWarningInfoDTO {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getBusTime() {
+        return busTime;
+    }
+
+    public void setBusTime(String busTime) {
+        this.busTime = busTime;
     }
 }

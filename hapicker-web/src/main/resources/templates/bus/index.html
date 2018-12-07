@@ -24,8 +24,10 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="alert alert-warning" role="alert"><i class="glyphicon glyphicon-warning-sign"></i>
-                    目前支持浙江省内汽车票查询
+                    本网站只支持数据查询，数据和代码仅供参考学习。目前支持浙江省内汽车票查询。
+                    <!--<a href="http://www.bababus.com" target="_blank">http://www.bababus.com</a>-->
                 </div>
+
                 <div>
                     <div class="row">
                         <div class="col-md-4">
@@ -70,12 +72,16 @@
                         <th>票价</th>
                         <th>余票</th>
                         <th>操作</th>
+                        <!--<th>来源</th>-->
                     </tr>
                     </thead>
                     <tbody id="result-tbody">
                     <!--<tr><td colspan='6'>车次查询中...</td></tr>-->
                     </tbody>
                     <script>
+                        //初次进入则进行查询一次
+                        searchScheduleBus();
+
                         function searchScheduleBus() {
                             $("#result-tbody").html("<tr><td colspan='6'>车次查询中...</td></tr>");
                             var params = {
@@ -107,6 +113,8 @@
                                             var paramDeparture = "'" + res.content[i].departure + "'"
                                             var paramDestination = "'" + res.content[i].destination + "'"
                                             var paramBusDate = "'" + res.content[i].busDate + "'"
+                                            var paramBusTime = "'" + res.content[i].busTime + "'"
+                                            var ticketLeft = "'" + res.content[i].ticketLeft + "'"
                                             var _tr = '<tr>' +
                                                 '<td>' + res.content[i].busTime + '</td>' +
                                                 '<td>' + res.content[i].departure + '</td>' +
@@ -116,8 +124,11 @@
                                                 '<td>' + '<a href="javascript:scheduleWarning(' + paramBusNo + ','
                                                 + paramDeparture + ','
                                                 + paramDestination + ','
-                                                + paramBusDate + ''
-                                                + ')">车次预警</a>' + '</td>' +
+                                                + paramBusDate + ','
+                                                + paramBusTime + ','
+                                                + ticketLeft + ''
+                                                + ')">预警</a>' + '</td>' +
+                                                // '<td>' + res.content[i].dataFrom + '</td>' +
                                                 '</tr>';
                                             _trs += _tr;
                                         }
@@ -137,12 +148,14 @@
                             });
                         }
 
-                        function scheduleWarning(busNo, departure, destination, busDate) {
+                        function scheduleWarning(busNo, departure, destination, busDate, busTime, ticketLeft) {
                             var params = {
                                 busNo: busNo,
                                 departure: departure,
                                 destination: destination,
-                                busDate: busDate
+                                busDate: busDate,
+                                busTime: busTime,
+                                ticketLeft: ticketLeft
                             }
 
                             $.ajax({
@@ -157,12 +170,12 @@
                                 //            },
                                 success: function (res) {
                                     alert(res.msg)
-                                    if (!res.success && confirm("立即登录")) {
+                                    if (!res.success && res.msg == "请先登录" && confirm("立即登录")) {
                                         requestWithReturnUrl('/login')
                                     }
                                 },
                                 error: function (res) {
-                                    alert('请求失败！ ' + res.msg)
+                                    alert('监听失败! ' + (res.msg == null ? '' : res.msg))
                                 }
                             })
 

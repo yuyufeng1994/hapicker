@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="include/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>汽车票 - Hapicker - 发现快乐</title>
+    <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css"/>
+    <script src="/vendor/wang/wangEditor.min.js"></script>
+    <style>
+
+    </style>
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="page-header hp-page-breadcrumb visible-md visible-lg">
+            <ol class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">汽车票</li>
+            </ol>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h1>我的车次 <small>已经添加监听的车次信息</small></h1>
+                </div>
+                <div class="alert alert-warning" role="alert"><i class="glyphicon glyphicon-warning-sign"></i>
+                    本网站只支持数据查询，数据和代码仅供参考学习。
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>车次号</th>
+                        <th>出发</th>
+                        <th>到达</th>
+                        <th>日期</th>
+                        <th>时间</th>
+                        <th>余票</th>
+                        <th>已监听(次)</th>
+                        <th>状态</th>
+                        <th>更新时间</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="result-tbody">
+                    <tr th:each="wb : ${page.list}">
+                        <td th:text="${wb.busWarningId}"></td>
+                        <td th:text="${wb.busNo}"></td>
+                        <td th:text="${wb.departure}"></td>
+                        <td th:text="${wb.destination}"></td>
+                        <td th:text="${wb.busDate}"></td>
+                        <td th:text="${wb.busTime}"></td>
+                        <td th:text="${wb.ticketLeft}"></td>
+                        <td th:text="${wb.warningTimes}"></td>
+                        <td th:text="${wb.warningStatusString}"></td>
+                        <td th:text="${' '+#dates.format(wb.updateTime, 'yyyy年MM月dd日 HH:mm:ss')}"></td>
+                        <td th:text="${' '+#dates.format(wb.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></td>
+                        <td><a th:if="${wb.warningStatus == 0}" href="javascript:void(0)">取消监听</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="panel panel-default visible-xs visible-sm" th:if="${page.total > page.size}">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6" th:if="${page.pageNum} != 1"><a class="btn btn-default btn-block"
+                                                                                  th:href="@{${pageUrl+(page.pageNum-1)}}">上一页</a>
+                            </div>
+                            <div class="col-xs-6" th:if="${page.pageNum} != ${page.pages}"><a
+                                    class="btn btn-default btn-block" th:href="@{${pageUrl+(page.pageNum+1)}}">下一页</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!--分页标签-->
+                <div class="visible-md visible-lg">
+                    <ul class="pagination">
+                        <li th:if="${page.pageNum} != 1"><a
+                                th:href="@{${pageUrl+(page.pageNum-1)}}">&laquo; 上一页</a></li>
+                    </ul>
+                    <ul class="pagination" th:each="na:${page.navigatepageNums}">
+                        <li th:if="${na} == ${page.pageNum}" class="active"><a th:text="${na}"></a></li>
+                        <li th:if="${na} != ${page.pageNum}"><a th:text="${na}"
+                                                                th:href="@{${pageUrl+na}}"></a>
+                        </li>
+                    </ul>
+                    <ul class="pagination">
+                        <li th:if="${page.pageNum} != ${page.pages}"><a
+                                th:href="@{${pageUrl+(page.pageNum+1)}}"> 下一页 &raquo;</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

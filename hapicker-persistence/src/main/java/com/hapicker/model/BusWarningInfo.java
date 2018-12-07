@@ -37,6 +37,12 @@ public class BusWarningInfo {
     private String busDate;
 
     /**
+     * 时间
+     */
+    @Column(name = "bus_time")
+    private String busTime;
+
+    /**
      * 剩余票数
      */
     @Column(name = "ticket_left")
@@ -68,7 +74,6 @@ public class BusWarningInfo {
      */
     @Column(name = "update_time")
     private Date updateTime;
-
 
 
     public BusWarningInfo() {
@@ -267,5 +272,13 @@ public class BusWarningInfo {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getBusTime() {
+        return busTime;
+    }
+
+    public void setBusTime(String busTime) {
+        this.busTime = busTime;
     }
 }
