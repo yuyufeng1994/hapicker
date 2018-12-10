@@ -49,6 +49,7 @@
         <module>hapicker-web</module>
         <module>hapicker-cloud</module>
         <module>hapicker-service</module>
+        <module>hapicker-task</module>
     </modules>
 
 

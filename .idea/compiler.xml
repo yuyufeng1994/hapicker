@@ -13,6 +13,7 @@
         <module name="hapicker-core" />
         <module name="hapicker-persistence" />
         <module name="hapicker-service" />
+        <module name="hapicker-task" />
         <module name="hapicker-web" />
       </profile>
     </annotationProcessing>
@@ -25,6 +26,7 @@
       <module name="hapicker-common" target="1.8" />
       <module name="hapicker-persistence" target="1.8" />
       <module name="hapicker-service" target="1.8" />
+      <module name="hapicker-task" target="1.8" />
       <module name="hapicker-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
