@@ -220,7 +220,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.5.10.RELEASE</version>
             </dependency>
-
         </dependencies>
 
     </dependencyManagement>

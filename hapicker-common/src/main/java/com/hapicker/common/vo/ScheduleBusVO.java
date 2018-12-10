@@ -1,4 +1,4 @@
-package com.hapicker.web.vo;
+package com.hapicker.common.vo;
 
 /**
  * 服务中的车次

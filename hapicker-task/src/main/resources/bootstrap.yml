@@ -1,0 +1,57 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: hapicker-task
+  cloud:
+    config:  # git管理配置
+      uri: http://111.231.83.73:8888/
+      label: master
+      profile: dev
+      #      profile: local
+      name: base,${spring.application.name}
+  datasource:
+    url: ${base.datasource.url}
+    username: ${base.datasource.username}
+    password: ${base.datasource.password}
+    driverClassName: ${base.datasource.driverClassName}
+    # 使用druid数据源
+    type: ${base.datasource.type}
+    filters: ${base.datasource.filters}
+    maxActive: ${base.datasource.maxActive}
+    initialSize: ${base.datasource.initialSize}
+    maxWait: ${base.datasource.maxWait}
+    minIdle: ${base.datasource.minIdle}
+    timeBetweenEvictionRunsMillis: ${base.datasource.timeBetweenEvictionRunsMillis}
+    minEvictableIdleTimeMillis: ${base.datasource.minEvictableIdleTimeMillis}
+    validationQuery: ${base.datasource.validationQuery}
+    testWhileIdle: ${base.datasource.testWhileIdle}
+    testOnBorrow: ${base.datasource.testOnBorrow}
+    testOnReturn: ${base.datasource.testOnReturn}
+    poolPreparedStatements: ${base.datasource.poolPreparedStatements}
+    maxOpenPreparedStatements: ${base.datasource.maxOpenPreparedStatements}
+
+#公共配置与profiles选择无关 mapperLocations指的路径是src/main/resources
+mybatis:
+  mapper-locations: classpath:mappers/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.hapicker.model  # 注意：对应实体类的路径
+
+management:
+  security:
+    enabled: false
+#      discovery:
+#        enabled: true #是从配置中心读取文件。
+#        service-id: hpWeb #配置中心的servieId，即服务名。
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+
+
+

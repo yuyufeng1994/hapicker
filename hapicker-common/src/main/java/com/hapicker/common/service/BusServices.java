@@ -1,9 +1,9 @@
-package com.hapicker.web.service;
+package com.hapicker.common.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hapicker.common.util.HttpUtils;
-import com.hapicker.web.vo.ScheduleBusVO;
+import com.hapicker.common.vo.ScheduleBusVO;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
@@ -18,10 +18,9 @@ import java.util.Map;
  * @author yuyufeng
  * @date 2018/12/6.
  */
-@Service
-public class BusService {
+public class BusServices {
 
-    public List<ScheduleBusVO> queryByBababus(String begin, String end, String date) throws Exception {
+    public static List<ScheduleBusVO> queryByBababus(String begin, String end, String date) throws Exception {
         int page = 1;
         List<ScheduleBusVO> ServiceBusDetailDTOList = new ArrayList<>();
         Map<String, String> querys = new HashMap<>();

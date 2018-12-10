@@ -3,10 +3,10 @@ package com.hapicker.web.action;
 import com.github.pagehelper.PageInfo;
 import com.hapicker.common.constant.SessionConstant;
 import com.hapicker.common.dto.*;
+import com.hapicker.common.service.BusServices;
+import com.hapicker.common.vo.ScheduleBusVO;
 import com.hapicker.web.client.BusWarningClient;
-import com.hapicker.web.service.BusService;
 import com.hapicker.web.util.SessionUtil;
-import com.hapicker.web.vo.ScheduleBusVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +26,6 @@ import java.util.List;
  */
 @Controller
 public class BusAction {
-
-    @Autowired
-    private BusService busService;
 
     @Autowired
     private BusWarningClient busWarningClient;
@@ -57,7 +54,7 @@ public class BusAction {
     public @ResponseBody
     ResponseJson querySchedule(@RequestBody ScheduleBusVO scheduleBusVO) throws Exception {
         try {
-            List<ScheduleBusVO> result = busService.queryByBababus(scheduleBusVO.getDeparture(), scheduleBusVO.getDestination(), scheduleBusVO.getBusDate());
+            List<ScheduleBusVO> result = BusServices.queryByBababus(scheduleBusVO.getDeparture(), scheduleBusVO.getDestination(), scheduleBusVO.getBusDate());
             return ResponseJson.success(result);
         } catch (Exception e) {
             return ResponseJson.fail("车次未找到");
@@ -92,7 +89,7 @@ public class BusAction {
         ResponseDTO<PageInfo<BusWarningInfoDTO>> responseDTO = busWarningClient.query(requestPageDTO);
         PageInfo<BusWarningInfoDTO> pageInfo = responseDTO.getContent();
         model.addAttribute("page", pageInfo);
-        model.addAttribute("pageUrl", "/user/"+userId+"/bus/warningBusList/");
+        model.addAttribute("pageUrl", "/user/" + userId + "/bus/warningBusList/");
         return "user/bus/list";
     }
 

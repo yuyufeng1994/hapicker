@@ -1,7 +1,7 @@
-package com.hapicker.web.config;
+package com.hapicker.task.config;
 
 
-import com.hapicker.web.config.properties.RedisProperties;
+import com.hapicker.task.config.properties.RedisProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -16,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
+
 /**
  * @author yuyufeng
  * @date 2018年8月21日17:25:57

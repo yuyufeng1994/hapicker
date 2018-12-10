@@ -1,7 +1,6 @@
 package com.hapicker.service.remoting;
 
 import com.github.pagehelper.PageInfo;
-import com.hapicker.common.dto.BusWarningInfoDTO;
 import com.hapicker.common.dto.MessageInfoDTO;
 import com.hapicker.common.dto.RequestPageDTO;
 import com.hapicker.common.dto.ResponseDTO;

@@ -23,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class BusWarningServiceImpl implements IBusWarningService {
+
     @Autowired
     private BusWarningInfoMapper busWarningInfoMapper;
 
