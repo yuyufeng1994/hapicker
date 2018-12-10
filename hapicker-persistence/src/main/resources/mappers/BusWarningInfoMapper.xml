@@ -25,4 +25,15 @@
         bus_warning_id, bus_no, departure, destination, bus_date, bus_time, ticket_left, warning_times,
         user_id, warning_status, create_time, update_time
     </sql>
+    <select id="selectWarningIds" resultType="java.lang.Long">
+        SELECT
+        bus_warning_id
+        FROM
+        bus_warning_info
+        WHERE
+        warning_status = 0
+        AND update_time <![CDATA[ <= ]]> CURRENT_TIMESTAMP - INTERVAL 5 MINUTE
+        ORDER BY update_time ASC
+        LIMIT #{pageNo,jdbcType=INTEGER},10
+    </select>
 </mapper>
