@@ -6,7 +6,9 @@ import com.hapicker.common.constant.RedisPrefix;
 import com.hapicker.common.service.BusServices;
 import com.hapicker.common.vo.ScheduleBusVO;
 import com.hapicker.mapper.BusWarningInfoMapper;
+import com.hapicker.mapper.UserInfoMapper;
 import com.hapicker.model.BusWarningInfo;
+import com.hapicker.task.service.MailService;
 import org.assertj.core.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,12 @@ public class BusWarningListener implements ApplicationContextAware {
     @Resource(name = "redisTemplate")
     private ListOperations<String, BusWarningInfo> listOperations;
 
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
     //开启监听数
     private static int nThread = 3;
 
@@ -52,7 +60,7 @@ public class BusWarningListener implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         for (int i = 0; i < nThread; i++) {
-            executorBusService.execute(new BusWarningListenerTask(busWarningInfoMapper, listOperations));
+            executorBusService.execute(new BusWarningListenerTask(busWarningInfoMapper, userInfoMapper, listOperations, mailService));
         }
     }
 

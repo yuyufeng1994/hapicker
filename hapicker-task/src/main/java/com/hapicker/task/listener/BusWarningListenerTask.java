@@ -6,12 +6,16 @@ import com.hapicker.common.constant.RedisPrefix;
 import com.hapicker.common.service.BusServices;
 import com.hapicker.common.vo.ScheduleBusVO;
 import com.hapicker.mapper.BusWarningInfoMapper;
+import com.hapicker.mapper.UserInfoMapper;
 import com.hapicker.model.BusWarningInfo;
+import com.hapicker.model.UserInfo;
+import com.hapicker.task.service.MailService;
 import org.mybatis.spring.MyBatisSystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.text.DateFormat;
@@ -32,11 +36,17 @@ public class BusWarningListenerTask implements Runnable {
 
     private BusWarningInfoMapper busWarningInfoMapper;
 
+    private UserInfoMapper userInfoMapper;
+
     private ListOperations<String, BusWarningInfo> listOperations;
 
-    public BusWarningListenerTask(BusWarningInfoMapper busWarningInfoMapper, ListOperations<String, BusWarningInfo> listOperations) {
+    private MailService mailService;
+
+    public BusWarningListenerTask(BusWarningInfoMapper busWarningInfoMapper, UserInfoMapper userInfoMapper, ListOperations<String, BusWarningInfo> listOperations, MailService mailService) {
         this.busWarningInfoMapper = busWarningInfoMapper;
+        this.userInfoMapper = userInfoMapper;
         this.listOperations = listOperations;
+        this.mailService = mailService;
     }
 
     @Override
@@ -86,6 +96,21 @@ public class BusWarningListenerTask implements Runnable {
                             if (ticketLeft < 10) {
                                 record.setWarningStatus(BusWarningStatusEnum.WARNING_SUCCESS.getKey());
                                 logger.info("车票小于10张，预警提醒用户" + JSONObject.toJSON(busWarningInfo) + "");
+
+                                UserInfo userInfo = userInfoMapper.selectByPrimaryKey(busWarningInfo.getUserId());
+                                if (!StringUtils.isEmpty(userInfo.getUserEmail())) {
+                                    String email = userInfo.getUserEmail();
+                                    String subject = "余票只剩【" + busWarningInfo.getTicketLeft() + "】张了 " + "车次：" + busWarningInfo.getDeparture() + "-" + busWarningInfo.getDestination() + " 发车时间：" + busWarningInfo.getBusDate() + " " + busWarningInfo.getBusTime();
+                                    String content = "车次信息：" + JSONObject.toJSON(busWarningInfo);
+                                    String receiverName = userInfo.getUserNick();
+                                    try {
+                                        mailService.sendEmail(email, content, subject, receiverName);
+                                        logger.info("邮件通知发送成功 " + JSONObject.toJSON(userInfo) + " " + JSONObject.toJSON(busWarningInfo));
+                                    } catch (Exception e) {
+                                        logger.info("邮件通知发送失败 " + JSONObject.toJSON(userInfo) + " " + JSONObject.toJSON(busWarningInfo));
+                                    }
+                                }
+
                             }
                             record.setUpdateTime(new Date());
                             busWarningInfoMapper.updateByPrimaryKeySelective(record);

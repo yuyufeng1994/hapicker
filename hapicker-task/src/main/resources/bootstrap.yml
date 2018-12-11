@@ -51,6 +51,12 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+mail:
+  account: yuyf123@foxmail.com
+  password: btjjddzzdoyqcaec
+  smptHost: smtp.qq.com
+  smtpPort: 587
+
 
 
 
