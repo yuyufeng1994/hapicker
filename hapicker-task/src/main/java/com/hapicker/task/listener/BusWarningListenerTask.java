@@ -101,7 +101,13 @@ public class BusWarningListenerTask implements Runnable {
                                 if (!StringUtils.isEmpty(userInfo.getUserEmail())) {
                                     String email = userInfo.getUserEmail();
                                     String subject = "余票只剩【" + busWarningInfo.getTicketLeft() + "】张了 " + "车次：" + busWarningInfo.getDeparture() + "-" + busWarningInfo.getDestination() + " 发车时间：" + busWarningInfo.getBusDate() + " " + busWarningInfo.getBusTime();
-                                    String content = "车次信息：" + JSONObject.toJSON(busWarningInfo);
+                                    String content = "---车次信息---<br />" +
+                                            "出发：" + busWarningInfo.getDeparture() + "<br />" +
+                                            "到达：" + busWarningInfo.getDestination() + "<br />" +
+                                            "发车时间：" + busWarningInfo.getBusDate() + " " + busWarningInfo.getBusTime() + "<br />" +
+                                            "当前余票：" + busWarningInfo.getDeparture() + "<br />" +
+                                            "系统共为您监听【" + busWarningInfo.getWarningTimes() + "】次，欢迎再次使用。" + "<br />" +
+                                            "备注：数据仅供参考";
                                     String receiverName = userInfo.getUserNick();
                                     try {
                                         mailService.sendEmail(email, content, subject, receiverName);
