@@ -52,7 +52,7 @@ public class UserAction {
     @RequestMapping(value = "/article/create", method = RequestMethod.GET)
     String articleCreate(Model model, @PathVariable("userId") Integer userId, HttpServletRequest request) {
         UserInfoDTO userInfoDTO = (UserInfoDTO) sessionUtil.getSession(request, SessionConstant.SESSION_USER);
-        if(userInfoDTO.getUserStatus() != 1){
+        if(userInfoDTO.getUserId() != 1){
             throw new BaseException(505, "没有权限");
         }
 
