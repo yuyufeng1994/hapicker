@@ -6,6 +6,8 @@ import com.hapicker.common.constant.BusWarningStatusEnum;
 import com.hapicker.common.constant.RedisPrefix;
 import com.hapicker.mapper.BusWarningInfoMapper;
 import com.hapicker.model.BusWarningInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
@@ -29,26 +31,55 @@ public class BusWarningTask {
     private ValueOperations<String, Object> valueOs;
 
     @Resource(name = "redisTemplate")
-    private ListOperations<String, Long> listOperations;
+    private ListOperations<String, BusWarningInfo> listOperations;
+
+    private static int LIST_MAXSIZE = 1000;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private BusWarningInfoMapper busWarningInfoMapper;
 
-    //监听车次监听表，对更新时间在最近20分钟之外的车次，进行重新筛入队列，来重新查询车次
-    @Scheduled(cron = "0 */20 * * * ?")
+    //监听车次监听表 60分钟之内的
+    @Scheduled(cron = "0 */1 * * * ?")
+    private void selectAndPushNowHour() {
+        logger.info("selectAndPush1Hour");
+        int upTime = 60;
+        pushByUpTime(upTime);
+    }
+
+    //监听车次监听表 24小时之内的
+    @Scheduled(cron = "0 */15 * * * ?")
+    private void selectAndPush1Today() {
+        logger.info("selectAndPush1Today");
+        int upTime = 1440;
+        pushByUpTime(upTime);
+    }
+
+    //监听车次监听表 3天之内的
+    @Scheduled(cron = "0 */30 * * * ?")
     private void selectAndPush() {
-        System.out.println("BusWarningTask.selectAndPush");
+        logger.info("selectAndPush");
+        int upTime = 4320;
+        pushByUpTime(upTime);
+    }
+
+    private void pushByUpTime(int upTime) {
         int pageNo = 0;
-        List<Long> busWarningIdList = null;
+        List<BusWarningInfo> busWarningIdList = null;
         while (pageNo == 0 || busWarningIdList != null && busWarningIdList.size() == 10) {
-            busWarningIdList = busWarningInfoMapper.selectWarningIds(pageNo);
-            for (Long aLong : busWarningIdList) {
-                listOperations.rightPush(RedisPrefix.BUS_WARNING, aLong);
+            busWarningIdList = busWarningInfoMapper.selectWarningBus(pageNo * 10, upTime);
+            if (listOperations.size(RedisPrefix.BUS_WARNING) < LIST_MAXSIZE) {
+                for (BusWarningInfo busWarningInfo : busWarningIdList) {
+                    listOperations.rightPush(RedisPrefix.BUS_WARNING, busWarningInfo);
+                }
+            } else {
+                logger.error("监听队列里面数据过多，暂停新增监听数据：" + LIST_MAXSIZE);
+                break;
             }
             pageNo++;
         }
     }
-
 }
 //每隔5秒执行一次：*/5 * * * * ?
 //每隔1分钟执行一次：0 */1 * * * ?

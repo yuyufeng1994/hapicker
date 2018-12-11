@@ -82,9 +82,9 @@
     <orderEntry type="library" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.14.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:4.3.14.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: tk.mybatis:mapper-spring-boot-starter:1.1.4" level="project" />
-    <orderEntry type="library" name="Maven: tk.mybatis:mapper-spring-boot-autoconfigure:1.1.4" level="project" />
-    <orderEntry type="library" name="Maven: tk.mybatis:mapper:3.4.3" level="project" />
+    <orderEntry type="library" name="Maven: tk.mybatis:mapper-spring-boot-starter:1.2.4" level="project" />
+    <orderEntry type="library" name="Maven: tk.mybatis:mapper-spring-boot-autoconfigure:1.2.4" level="project" />
+    <orderEntry type="library" name="Maven: tk.mybatis:mapper:3.5.3" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper-spring-boot-starter:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper-spring-boot-autoconfigure:1.2.3" level="project" />

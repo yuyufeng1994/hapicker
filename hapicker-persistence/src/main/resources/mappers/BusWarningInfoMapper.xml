@@ -27,13 +27,27 @@
     </sql>
     <select id="selectWarningIds" resultType="java.lang.Long">
         SELECT
-        bus_warning_id
+            bus_warning_id
         FROM
-        bus_warning_info
+            bus_warning_info
         WHERE
-        warning_status = 0
-        AND update_time <![CDATA[ <= ]]> CURRENT_TIMESTAMP - INTERVAL 5 MINUTE
+            warning_status = 0
+          AND update_time <![CDATA[ <= ]]> CURRENT_TIMESTAMP - INTERVAL 5 MINUTE
         ORDER BY update_time ASC
-        LIMIT #{pageNo,jdbcType=INTEGER},10
+                 LIMIT #{pageNo,jdbcType=INTEGER},10
+    </select>
+
+    <select id="selectWarningBus" resultType="com.hapicker.model.BusWarningInfo">
+        SELECT
+            bus_warning_id, bus_no, departure, destination, bus_date, bus_time, ticket_left, warning_times,
+            user_id, warning_status, create_time, update_time
+        FROM
+            bus_warning_info
+        WHERE
+            warning_status = 0
+          AND str_to_date(concat(bus_date,' ',bus_time), '%Y-%m-%d %H:%i') <![CDATA[ <= ]]> CURRENT_TIMESTAMP + INTERVAL #{upTime,jdbcType=INTEGER} MINUTE
+--           AND update_time <![CDATA[ <= ]]> CURRENT_TIMESTAMP - INTERVAL 1 MINUTE
+        ORDER BY update_time ASC
+                 LIMIT #{pageNo,jdbcType=INTEGER},10
     </select>
 </mapper>

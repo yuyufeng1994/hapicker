@@ -4,7 +4,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.hapicker.task.config.properties.DruidProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,6 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import tk.mybatis.spring.annotation.MapperScan;
 
 import javax.sql.DataSource;
 
@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 public class MybatisConfig {
 
     @Autowired
-   private DruidProperties druidProperties;
+    private DruidProperties druidProperties;
 
     @Bean
     public DruidDataSource dataSource() {

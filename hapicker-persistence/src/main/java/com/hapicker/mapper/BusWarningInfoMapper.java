@@ -13,4 +13,11 @@ public interface BusWarningInfoMapper extends Mapper<BusWarningInfo> {
      * @return
      */
     List<Long> selectWarningIds(@Param("pageNo") int pageNo);
+
+    /**
+     * 查询对象
+     * @param pageNo
+     * @return
+     */
+    List<BusWarningInfo> selectWarningBus(@Param("pageNo") int pageNo,@Param("upTime") int upTime);
 }

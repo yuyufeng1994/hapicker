@@ -3,10 +3,11 @@ package com.hapicker.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "bus_warning_info")
-public class BusWarningInfo {
+public class BusWarningInfo implements Serializable {
     /**
      * 车次监听ID
      */
