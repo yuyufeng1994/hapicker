@@ -10,6 +10,8 @@ public class ExceptionCode {
     public final static int NO_PERMISSION = 505;
     //没有登录
     public final static int NO_LOGIN = 506;
+    //传参错误
+    public final static int ERROR_PARAM = 100;
 
 
 }

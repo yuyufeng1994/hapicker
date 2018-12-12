@@ -1,6 +1,7 @@
 package com.hapicker.web.action;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hapicker.common.constant.ExceptionCode;
 import com.hapicker.common.constant.SessionConstant;
 import com.hapicker.common.constant.StatusEnum;
 import com.hapicker.common.constant.UserConnectInfoPlatformEnum;
@@ -77,7 +78,7 @@ public class LoginAction {
     String doLogin(String userAccount, String userPwd, Boolean rememberMe, String returnUrl, Model model, HttpServletResponse httpServletResponse) {
         model.addAttribute("returnUrl", returnUrl);
         if (!ValidationUtil.checkAccount(userAccount) && ValidationUtil.checkPwd(userPwd)) {
-            throw new BaseException(100, "登录数据不正确");
+            throw new BaseException(ExceptionCode.ERROR_PARAM, "传入数据不正确");
         }
 
         UserInfoDTO userInfo = new UserInfoDTO();

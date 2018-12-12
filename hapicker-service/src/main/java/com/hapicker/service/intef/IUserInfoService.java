@@ -44,4 +44,10 @@ public interface IUserInfoService {
      * @return
      */
     UserConnectInfoDTO getUserConnectInfo(UserConnectInfoDTO userConnectInfo);
+
+    /**
+     * 修改信息
+     * @param userInfo
+     */
+    void updateUserInfo(UserInfoDTO userInfo);
 }

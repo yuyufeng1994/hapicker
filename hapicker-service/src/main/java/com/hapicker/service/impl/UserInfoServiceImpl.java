@@ -43,6 +43,14 @@ public class UserInfoServiceImpl implements IUserInfoService {
     }
 
     @Override
+    public void updateUserInfo(UserInfoDTO userInfoDTO) {
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(userInfoDTO,userInfo);
+        userInfo.setUpdateTime(new Date());
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
+    }
+
+    @Override
     public void insertUserConnectInfo(UserConnectInfoDTO userConnectInfoDTO){
         UserConnectInfo userConnectInfo = new UserConnectInfo();
         BeanUtils.copyProperties(userConnectInfoDTO,userConnectInfo);

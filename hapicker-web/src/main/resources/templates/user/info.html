@@ -5,6 +5,12 @@
     <meta charset="UTF-8"/>
     <title>用户 - Hapicker - 发现快乐</title>
     <!--<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>-->
+    <style>
+        .hp-disabled {
+            color: #9d9d9d;
+        }
+
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
@@ -22,49 +28,126 @@
                     <tr>
                         <th>头像</th>
                         <td><img th:src="@{${userInfo.userAvatar}}" class="img-circle hp-user-avatar"></td>
+                        <td><a href="javascript:void(0)" class="hp-disabled">修改</a></td>
                     </tr>
                     <tr>
                         <th>用户ID</th>
                         <td><p th:text="${userInfo.userId}"></p></td>
+                        <td></td>
                     </tr>
+                    <input type="hidden" th:value="${userInfo.userId}" id="hidden-user-id"/>
                     <tr>
                         <th>用户名</th>
                         <td><p th:text="${userInfo.userName}"></p></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>用户昵称</th>
                         <td><p th:text="${userInfo.userNick}"></p></td>
+                        <td><a href="javascript:void(0)" onclick="modifyAttr('userNick',this)">修改</a></td>
                     </tr>
                     <tr>
                         <th>用户邮箱</th>
                         <td><p th:text="${userInfo.userEmail}"></p></td>
+                        <td><a href="javascript:void(0)" onclick="modifyAttr('userEmail',this)">修改</a></td>
                     </tr>
                     <tr>
                         <th>手机号码</th>
                         <td><p th:text="${userInfo.userPhone}"></p></td>
+                        <td><a href="javascript:void(0)" onclick="modifyAttr('userPhone',this)">修改</a></td>
                     </tr>
                     <tr>
                         <th>用户简介</th>
                         <td><p th:text="${userInfo.userProfile}"></p></td>
+                        <td><a href="javascript:void(0)" onclick="modifyAttr('userProfile',this)">修改</a></td>
                     </tr>
                     <tr>
                         <th>用户状态</th>
                         <td><p th:text="${userInfo.userStatusString}"></p></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>创建时间</th>
                         <td><p th:text="${#dates.format(userInfo.createTime, 'yyyy年MM月dd日 HH:mm:ss')}"></p></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>更新时间</th>
                         <td><p th:text="${#dates.format(userInfo.updateTime, 'yyyy年MM月dd日 HH:mm:ss')}"></p></td>
+                        <td></td>
                     </tr>
 
                 </table>
             </div>
         </div>
-
+        <div class="modal fade" tabindex="-1" role="dialog" id="modify-model">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">修改
+                            <pi id="modify-paramString"></pi>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="modify-input" placeholder="">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="modifySure()">提交</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
+    <script>
+        var paramTemp;
+        function modifyAttr(param, mythis) {
+            paramTemp = param;
+            $this = $(mythis);
+            $("#modify-paramString").html($this.parent().parent().find("th").html())
+            $("#modify-input").val($this.parent().parent().find("p").html());
+            $("#modify-model").modal("toggle");
+        }
+
+        function modifySure() {
+            var hiddenUserId = $("#hidden-user-id").val();
+            var params = {}
+            params[paramTemp] = $("#modify-input").val()
+
+            $.ajax({
+                url: "/user/" + hiddenUserId + "/update",
+                type: 'POST',
+                data: JSON.stringify(params),
+                async: true,
+                contentType: "application/json",
+                dataType: "json",
+                //            xhrFields: {
+                //                withCredentials: true
+                //            },
+                beforeSend: function () {
+                },
+                success: function (res) {
+                    if(res.success){
+                        $("#modify-model").modal("toggle");
+                        history.go(0)
+                    }else{
+                        alert(res.msg)
+                    }
+
+                }, error: function (res) {
+                    alert(res)
+                }
+            })
+        }
+    </script>
 </div>
 </body>
 </html>

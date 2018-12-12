@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,7 +54,7 @@ public class UserRemoting {
     @ApiOperation(value = "insertUserConnectInfo", httpMethod = "POST")
     @RequestMapping(value = "insertUserConnectInfo", method = RequestMethod.POST)
     ResponseDTO insertUserConnectInfo(@ApiParam(value = "插入用户互联对象") @RequestBody UserConnectInfoDTO userConnectInfo) {
-         userInfoService.insertUserConnectInfo(userConnectInfo);
+        userInfoService.insertUserConnectInfo(userConnectInfo);
         return ResponseDTO.success();
     }
 
@@ -62,5 +63,16 @@ public class UserRemoting {
     ResponseDTO<UserInfoDTO> insertUserInfo(@ApiParam(value = "插入用户对象") @RequestBody UserInfoDTO userInfo) {
         UserInfoDTO userInfoDTO = userInfoService.insertUserInfo(userInfo);
         return ResponseDTO.success(userInfoDTO);
+    }
+
+    @ApiOperation(value = "updateUserInfo", httpMethod = "POST")
+    @RequestMapping(value = "updateUserInfo", method = RequestMethod.POST)
+    ResponseDTO updateUserInfo(@ApiParam(value = "修改用户对象") @RequestBody UserInfoDTO userInfo) {
+        try {
+            userInfoService.updateUserInfo(userInfo);
+        } catch (DuplicateKeyException e) {
+            return ResponseDTO.fail("数据已存在");
+        }
+        return ResponseDTO.success();
     }
 }

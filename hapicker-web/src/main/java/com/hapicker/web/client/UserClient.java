@@ -29,4 +29,7 @@ public interface UserClient {
 
     @RequestMapping(value = "insertUserInfo", method = RequestMethod.POST)
     ResponseDTO<UserInfoDTO> insertUserInfo(@RequestBody UserInfoDTO userInfo);
+
+    @RequestMapping(value = "updateUserInfo", method = RequestMethod.POST)
+    ResponseDTO updateUserInfo(@RequestBody UserInfoDTO userInfo);
 }
