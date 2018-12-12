@@ -105,7 +105,7 @@ public class BusWarningListenerTask implements Runnable {
                                             "出发：" + busWarningInfo.getDeparture() + "<br />" +
                                             "到达：" + busWarningInfo.getDestination() + "<br />" +
                                             "发车时间：" + busWarningInfo.getBusDate() + " " + busWarningInfo.getBusTime() + "<br />" +
-                                            "当前余票：" + busWarningInfo.getDeparture() + "<br />" +
+                                            "当前余票：" + ticketLeft + "<br />" +
                                             "系统共为您监听【" + record.getWarningTimes() + "】次，欢迎再次使用。" + "<br />" +
                                             "备注：数据仅供参考";
                                     String receiverName = userInfo.getUserNick();
