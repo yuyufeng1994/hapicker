@@ -11,7 +11,7 @@
     <div class="hp-index-bac-white">
         <div class="bac-1 hp-jumbotron">
             <div class="row hp-margin-none">
-                <div class="col-md-6 col-lg-8 visible-md visible-lg">
+                <div class="col-md-6 col-lg-7 visible-md visible-lg">
                     <p class="hp-jumbotron-header">Hapicker</p>
                     <p style="font-size: 2rem;text-align: center;">博客、工具及私藏，提升技术，发现快乐</p>
                     <p align="center"><a class="hp-jumbotron-btn" href="/index#index-panel-scroll"
@@ -20,7 +20,7 @@
                     <img class="center-block img-rounded hp-masthead-img"
                          th:src="@{'/image/index-me.png'}"/>
                 </div>
-                <div class="col-md-6 col-lg-4 hp-login-box-parent">
+                <div class="col-md-6 col-lg-5 hp-login-box-parent">
                     <div class="panel panel-default">
                         <div class="panel-body hp-login-box">
                             <form id="myForm" action="/doLogin" method="post">
@@ -52,7 +52,7 @@
                                 <input name="returnUrl" type="hidden" th:value="${returnUrl}">
                                 <button type="button" class="btn btn-default btn-block" onclick="doSubmit()">登录</button>
                                 <p style="text-align: center;color: #ff3b30;margin: 0;" id="p-tips"></p>
-                                <p style="font-size: 15px;color: #666;text-align: left;margin-top: 30px; margin-right: 100px">快捷登录：<a
+                                <p style="font-size: 15px;color: #666;text-align: left;margin-top: 30px; ">快捷登录：<a
                                         onclick="doTencentLogin()"><img
                                         th:src="@{'/image/qq_logo.png'}"></a></p>
                             </form>
