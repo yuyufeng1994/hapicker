@@ -93,10 +93,9 @@ public class BusWarningListenerTask implements Runnable {
                             }*/
                             record.setTicketLeft(ticketLeft);
                             record.setWarningTimes(busWarningInfo.getWarningTimes() + 1);
-                            if (ticketLeft < 10) {
+                            if (ticketLeft < 10 || busWarningInfo.getTicketLeft() - ticketLeft > 10) {
                                 record.setWarningStatus(BusWarningStatusEnum.WARNING_SUCCESS.getKey());
-                                logger.info("车票小于10张，预警提醒用户" + JSONObject.toJSON(busWarningInfo) + "");
-
+                                logger.info("车票小于10张，或余票相差大于10，预警提醒用户" + JSONObject.toJSON(busWarningInfo) + "");
                                 UserInfo userInfo = userInfoMapper.selectByPrimaryKey(busWarningInfo.getUserId());
                                 if (!StringUtils.isEmpty(userInfo.getUserEmail())) {
                                     String email = userInfo.getUserEmail();
