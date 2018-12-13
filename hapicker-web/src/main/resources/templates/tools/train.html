@@ -66,6 +66,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th>车次号</th>
                         <th>出发时间</th>
                         <th>出发</th>
                         <th>到达</th>
@@ -112,6 +113,7 @@
                                         var _trs = '';
                                         for (var i = 0; i < res.content.length; i++) {
                                             var _tr = '<tr>' +
+                                                '<td>' + res.content[i].trainNo + '</td>' +
                                                 '<td>' + res.content[i].beginTime + '</td>' +
                                                 '<td>' + res.content[i].beginStation + '</td>' +
                                                 '<td>' + res.content[i].endStation + '</td>' +
@@ -130,7 +132,7 @@
                                             $("#result-tbody").html(_trs);
                                         }
                                     } else {
-                                        $("#result-tbody").html("<tr><td colspan='6'>'+res.msg+'</td></tr>");
+                                        $("#result-tbody").html("<tr><td colspan='6'>"+res.msg+"</td></tr>");
                                     }
 
                                 },

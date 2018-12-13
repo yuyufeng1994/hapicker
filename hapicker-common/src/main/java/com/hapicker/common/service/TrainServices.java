@@ -10,9 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -28,12 +26,11 @@ public class TrainServices {
         //初始化
         stationNameIDs = new Properties();
         try {
-            String file = TrainServices.class.getResource("/data/tuniu_station.properties").getFile();
-            FileInputStream fileInputStream = new FileInputStream(file);
-            InputStreamReader reader = new InputStreamReader(fileInputStream, "utf-8");
+            InputStream inputStream = TrainServices.class.getResourceAsStream("/data/tuniu_station.properties");
+            InputStreamReader reader = new InputStreamReader(inputStream, "utf-8");
             stationNameIDs.load(reader);
             reader.close();
-            fileInputStream.close();
+            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
