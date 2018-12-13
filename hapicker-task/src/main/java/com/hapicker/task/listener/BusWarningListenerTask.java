@@ -97,7 +97,7 @@ public class BusWarningListenerTask implements Runnable {
                                 UserInfo userInfo = userInfoMapper.selectByPrimaryKey(busWarningInfo.getUserId());
                                 if (!StringUtils.isEmpty(userInfo.getUserEmail())) {
                                     String email = userInfo.getUserEmail();
-                                    String subject = "余票只剩【" + busWarningInfo.getTicketLeft() + "】张了 " + "车次：" + busWarningInfo.getDeparture() + "-" + busWarningInfo.getDestination() + " 发车时间：" + busWarningInfo.getBusDate() + " " + busWarningInfo.getBusTime();
+                                    String subject = "余票只剩【" + ticketLeft + "】张了 " + "车次：" + busWarningInfo.getDeparture() + "-" + busWarningInfo.getDestination() + " 发车时间：" + busWarningInfo.getBusDate() + " " + busWarningInfo.getBusTime();
                                     String content = "---车次信息---<br />" +
                                             "出发：" + busWarningInfo.getDeparture() + "<br />" +
                                             "到达：" + busWarningInfo.getDestination() + "<br />" +
@@ -128,8 +128,8 @@ public class BusWarningListenerTask implements Runnable {
                 }
             } else {
                 try {
-                    logger.info(Thread.currentThread().getName() + " 监听中...");
-                    TimeUnit.MILLISECONDS.sleep(3000);
+//                    logger.info(Thread.currentThread().getName() + " 监听中...");
+                    TimeUnit.MILLISECONDS.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
