@@ -3,7 +3,7 @@
       layout:decorator="include/layout">
 <head>
     <meta charset="UTF-8"/>
-    <title>汽车票 - Hapicker - 发现快乐</title>
+    <title>火车票查询 - Hapicker - 发现快乐</title>
     <link th:href="@{/vendor/wang/wangEditor.min.css}" rel="stylesheet" type="text/css"/>
     <script src="/vendor/wang/wangEditor.min.js"></script>
     <style>
@@ -18,15 +18,14 @@
         <div class="page-header hp-page-breadcrumb visible-md visible-lg">
             <ol class="breadcrumb">
                 <li><a href="/">首页</a></li>
-                <li class="active">汽车票</li>
+                <li><a href="/tools/index">实用工具</a></li>
+                <li class="active">火车票</li>
             </ol>
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="alert alert-warning" role="alert"><i class="glyphicon glyphicon-warning-sign"></i>
-                    本网站只支持数据查询，数据和代码仅供参考学习。目前支持浙江省内汽车票查询。
-                    <p> 预警之后，如果您的账户填写了邮箱，则系统在检测到余票过少，或者急剧下降的时候，会通过邮件的方式提醒您。</p>
-                    <p>您可在“我的车次”中查看您的预警车次信息。<a th:href="${'/user/'+SESSION_USER.userId+'/bus/warningBusList/1'}">立即查看</a></p>
+                    本网站只支持数据查询，数据和代码仅供参考学习。
                 </div>
 
                 <div>
@@ -42,7 +41,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon" id="sizing-addon2">到达</span>
                                 <input type="text" class="form-control" placeholder="到达"
-                                       aria-describedby="sizing-addon2" value="平湖" id="search-destination">
+                                       aria-describedby="sizing-addon2" value="广州" id="search-destination">
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-3 -->
                         <div class="col-md-4">
@@ -70,9 +69,12 @@
                         <th>出发时间</th>
                         <th>出发</th>
                         <th>到达</th>
-                        <th>票价</th>
-                        <th>余票</th>
-                        <th>操作</th>
+                        <th>历时</th>
+                        <th>商务座</th>
+                        <th>一等座</th>
+                        <th>二等座</th>
+                        <th>硬卧</th>
+                        <th>硬座</th>
                         <!--<th>来源</th>-->
                     </tr>
                     </thead>
@@ -92,7 +94,7 @@
                             }
 
                             $.ajax({
-                                url: "/bus/querySchedule",
+                                url: "/tools/train/querySchedule",
                                 type: 'POST',
                                 data: JSON.stringify(params),
                                 async: true,
@@ -109,27 +111,16 @@
                                     if (res.success == true) {
                                         var _trs = '';
                                         for (var i = 0; i < res.content.length; i++) {
-                                            // console.log(res.content[i])
-                                            var paramBusNo = "'" + res.content[i].busNo + "'"
-                                            var paramDeparture = "'" + res.content[i].departure + "'"
-                                            var paramDestination = "'" + res.content[i].destination + "'"
-                                            var paramBusDate = "'" + res.content[i].busDate + "'"
-                                            var paramBusTime = "'" + res.content[i].busTime + "'"
-                                            var ticketLeft = "'" + res.content[i].ticketLeft + "'"
                                             var _tr = '<tr>' +
-                                                '<td>' + res.content[i].busTime + '</td>' +
-                                                '<td>' + res.content[i].departure + '</td>' +
-                                                '<td>' + res.content[i].destination + '</td>' +
-                                                '<td>' + res.content[i].ticketPrice + '</td>' +
-                                                '<td>' + res.content[i].ticketLeft + '</td>' +
-                                                '<td>' + '<a href="javascript:scheduleWarning(' + paramBusNo + ','
-                                                + paramDeparture + ','
-                                                + paramDestination + ','
-                                                + paramBusDate + ','
-                                                + paramBusTime + ','
-                                                + ticketLeft + ''
-                                                + ')">预警</a>' + '</td>' +
-                                                // '<td>' + res.content[i].dataFrom + '</td>' +
+                                                '<td>' + res.content[i].beginTime + '</td>' +
+                                                '<td>' + res.content[i].beginStation + '</td>' +
+                                                '<td>' + res.content[i].endStation + '</td>' +
+                                                '<td>' + res.content[i].overTime + '</td>' +
+                                                '<td>' + res.content[i].seatBD + '</td>' +
+                                                '<td>' + res.content[i].seat1 + '</td>' +
+                                                '<td>' + res.content[i].seat2 + '</td>' +
+                                                '<td>' + res.content[i].bedHard + '</td>' +
+                                                '<td>' + res.content[i].seatHard + '</td>' +
                                                 '</tr>';
                                             _trs += _tr;
                                         }
@@ -147,39 +138,6 @@
                                     console.log(res)
                                 }
                             });
-                        }
-
-                        function scheduleWarning(busNo, departure, destination, busDate, busTime, ticketLeft) {
-                            var params = {
-                                busNo: busNo,
-                                departure: departure,
-                                destination: destination,
-                                busDate: busDate,
-                                busTime: busTime,
-                                ticketLeft: ticketLeft
-                            }
-
-                            $.ajax({
-                                url: "/bus/insertWarningBus",
-                                type: 'POST',
-                                data: JSON.stringify(params),
-                                async: true,
-                                contentType: "application/json",
-                                dataType: "json",
-                                //            xhrFields: {
-                                //                withCredentials: true
-                                //            },
-                                success: function (res) {
-                                    alert(res.msg)
-                                    if (!res.success && res.msg == "请先登录" && confirm("立即登录")) {
-                                        requestWithReturnUrl('/login')
-                                    }
-                                },
-                                error: function (res) {
-                                    alert('监听失败! ' + (res.msg == null ? '' : res.msg))
-                                }
-                            })
-
                         }
                     </script>
                 </table>
