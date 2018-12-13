@@ -26,7 +26,7 @@
                 <div class="alert alert-warning" role="alert"><i class="glyphicon glyphicon-warning-sign"></i>
                     本网站只支持数据查询，数据和代码仅供参考学习。目前支持浙江省内汽车票查询。
                     <p> 预警之后，如果您的账户填写了邮箱，则系统在检测到余票过少，或者急剧下降的时候，会通过邮件的方式提醒您。</p>
-                    <p>您可在“我的车次”中查看您的预警车次信息。<a th:href="${'/user/'+SESSION_USER.userId+'/bus/warningBusList/1'}">立即查看</a></p>
+                    <p>您可在“我的车次”中查看您的预警车次信息。<a th:if="${SESSION_USER != null}" th:href="${'/user/'+SESSION_USER.userId+'/bus/warningBusList/1'}">立即查看</a></p>
                 </div>
 
                 <div>
