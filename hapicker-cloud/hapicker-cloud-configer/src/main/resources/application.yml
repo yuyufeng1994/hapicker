@@ -7,11 +7,11 @@ spring:
     config:  # git管理配置
       server:
         git:
-          uri: https://gitee.com/mryyf/hapicker-cloud-configer  #配置git仓库位置
+          uri: your_uri  #配置git仓库位置
           search-paths: conf
           label: master
-          username: 416530244@qq.com
-          password: yyf1238523
+          username: your_username
+          password: your_password
 
 ##注册中心
 #eureka:
