@@ -52,10 +52,10 @@ pagehelper:
   params: count=countSql
 
 mail:
-  account: yuyf123@foxmail.com
-  password: btjjddzzdoyqcaec
-  smptHost: smtp.qq.com
-  smtpPort: 587
+  account: ${hapicker-task.mail.account}
+  password: ${hapicker-task.mail.password}
+  smptHost: ${hapicker-task.mail.smptHost}
+  smtpPort: ${hapicker-task.mail.smtpPort}
 
 
 
